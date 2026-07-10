@@ -19,6 +19,26 @@
     <meta name="twitter:image" content="https://akbarmuh.github.io/img/profile.jpg">
     <link rel="canonical" href="https://akbarmuh.github.io/">
 
+    <!-- Structured data (schema.org Person) for technical/SEO discoverability -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Akbar Muhammad Prakoso",
+      "url": "https://akbarmuh.github.io/",
+      "image": "https://akbarmuh.github.io/img/profile.jpg",
+      "jobTitle": "Applied AI Engineer",
+      "worksFor": { "@type": "Organization", "name": "Bank Mandiri" },
+      "alumniOf": { "@type": "CollegeOrUniversity", "name": "Telkom University" },
+      "email": "mailto:akbar.muhammt@gmail.com",
+      "sameAs": [
+        "https://github.com/AkbarMuh",
+        "https://www.linkedin.com/in/akbarmuh/"
+      ],
+      "knowsAbout": ["Agentic AI", "LLM Engineering", "Retrieval-Augmented Generation", "Computer Vision", "Edge AI", "NVIDIA Jetson", "MLOps", "Python"]
+    }
+    </script>
+
     <!-- Favicon: inline SVG (red Phantom star) — no external file needed -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0a'/%3E%3Cpath d='M16 3L19.06 11.79L28.36 11.98L20.95 17.61L23.64 26.52L16 21.2L8.36 26.52L11.05 17.61L3.64 11.98L12.94 11.79Z' fill='%23e60012'/%3E%3C/svg%3E">
 
@@ -386,7 +406,7 @@
         @keyframes spin { to { transform: rotate(360deg); } }
 
         /* back to top */
-        .to-top { position: fixed; bottom: 26px; right: 26px; z-index: 8000; background: var(--red); color: #fff; border: 3px solid #fff; width: 52px; height: 52px; display: grid; place-items: center; text-decoration: none; transform: skewX(-8deg); font-size: 1.3rem; opacity: 0; pointer-events: none; transition: opacity .3s, transform .2s; box-shadow: 5px 5px 0 rgba(0,0,0,.5); }
+        .to-top { position: fixed; bottom: 90px; right: 26px; z-index: 8000; background: var(--red); color: #fff; border: 3px solid #fff; width: 52px; height: 52px; display: grid; place-items: center; text-decoration: none; transform: skewX(-8deg); font-size: 1.3rem; opacity: 0; pointer-events: none; transition: opacity .3s, transform .2s; box-shadow: 5px 5px 0 rgba(0,0,0,.5); }
         .to-top.show { opacity: 1; pointer-events: auto; }
         .to-top:hover { transform: skewX(-8deg) translateY(-4px); }
 
@@ -429,10 +449,81 @@
             .contact-grid h2 { -webkit-text-stroke: 0; }
             .socials a { width: 48px; height: 48px; }
             .copyright { font-size: .8rem; letter-spacing: 1px; margin-top: 40px; }
-            .to-top { width: 46px; height: 46px; bottom: 16px; right: 16px; }
+            .to-top { width: 46px; height: 46px; bottom: 74px; right: 16px; }
             .float-star { display: none; }
             #splash .splash-title { -webkit-text-stroke: 1px #000; }
         }
+
+        /* ===================== PROJECT TECH TAGS + METRICS ===================== */
+        .card .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+        .card .stack span {
+            font-family: var(--font-cond); font-weight: 600; text-transform: uppercase; letter-spacing: .5px;
+            font-size: .7rem; background: var(--ink); color: #fff; padding: 2px 9px; transform: skewX(-8deg);
+        }
+        .card .metric { margin-top: 14px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .card .metric div b { font-family: var(--font-display); color: var(--red); font-size: 1.4rem; line-height: 1; display: block; }
+        .card .metric div span { font-family: var(--font-cond); font-weight: 600; text-transform: uppercase; font-size: .66rem; color: #777; letter-spacing: .5px; }
+
+        /* ===================== FEATURED CASE STUDY ===================== */
+        #casestudy { background: var(--paper); color: var(--ink); }
+        #casestudy .sec-head .ghost { -webkit-text-stroke: 2px rgba(0,0,0,.12); }
+        .cs-card { background: #fff; border: 3px solid var(--ink); box-shadow: 12px 12px 0 var(--red); }
+        .cs-top { background: var(--ink); color: #fff; padding: 22px 26px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+        .cs-top h3 { font-family: var(--font-display); font-size: 2rem; text-transform: uppercase; line-height: 1; }
+        .cs-top .role { font-family: var(--font-cond); font-style: italic; font-weight: 700; text-transform: uppercase; color: #ff8a90; letter-spacing: 1px; font-size: .88rem; margin-top: 4px; }
+        .cs-top .repo-link { font-family: var(--font-cond); font-weight: 700; font-style: italic; text-transform: uppercase; color: var(--ink); background: #fff; padding: 7px 16px; transform: skewX(-8deg); text-decoration: none; font-size: .85rem; white-space: nowrap; }
+        .cs-top .repo-link:hover { background: var(--red); color: #fff; }
+        .cs-body { padding: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+        .cs-block h4 { font-family: var(--font-cond); font-weight: 700; font-style: italic; text-transform: uppercase; color: var(--red); letter-spacing: 1px; margin-bottom: 10px; border-left: 4px solid var(--red); padding-left: 10px; }
+        .cs-block p { font-size: .98rem; line-height: 1.65; color: #333; }
+        .cs-block ul { list-style: none; }
+        .cs-block li { position: relative; padding-left: 20px; margin-bottom: 7px; font-size: .96rem; line-height: 1.5; color: #333; }
+        .cs-block li::before { content: '▸'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+        .cs-stack { padding: 0 26px 26px; display: flex; flex-wrap: wrap; gap: 8px; }
+        .cs-stack span { font-family: var(--font-cond); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; background: var(--ink); color: #fff; padding: 4px 12px; transform: skewX(-8deg); font-size: .8rem; }
+        @media (max-width: 720px) { .cs-body { grid-template-columns: 1fr; } .cs-top h3 { font-size: 1.6rem; } }
+
+        /* ===================== AI CHAT WIDGET (client-side retrieval, no backend) ===================== */
+        .chat-fab {
+            position: fixed; bottom: 26px; right: 26px; z-index: 8500;
+            display: flex; align-items: center; cursor: pointer;
+            background: var(--red); color: #fff; border: 3px solid #fff; padding: 12px 18px;
+            font-family: var(--font-cond); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: 1px;
+            transform: skewX(-8deg); box-shadow: 5px 5px 0 rgba(0,0,0,.5); transition: transform .2s, background .2s;
+        }
+        .chat-fab span { transform: skewX(8deg); display: inline-flex; align-items: center; gap: 8px; }
+        .chat-fab:hover { transform: skewX(-8deg) translateY(-4px); background: var(--red-deep); }
+        .chat-fab.hide { display: none; }
+
+        .chat-panel {
+            position: fixed; bottom: 26px; right: 26px; z-index: 8600;
+            width: min(390px, 92vw); height: min(560px, 76vh);
+            background: var(--ink); border: 3px solid var(--red); display: none; flex-direction: column;
+            box-shadow: 10px 10px 0 rgba(0,0,0,.5); overflow: hidden;
+        }
+        .chat-panel.open { display: flex; animation: chatIn .25s cubic-bezier(.2,1.3,.4,1); }
+        @keyframes chatIn { from { opacity: 0; transform: translateY(20px) scale(.96); } }
+        .chat-head { background: var(--red); color: #fff; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; }
+        .chat-head .t { font-family: var(--font-display); text-transform: uppercase; font-size: 1.15rem; letter-spacing: 1px; line-height: 1; }
+        .chat-head .t small { display: block; font-family: var(--font-cond); font-style: italic; font-weight: 600; font-size: .6rem; letter-spacing: 1px; opacity: .92; }
+        .chat-head .x { background: none; border: none; color: #fff; font-size: 1.4rem; cursor: pointer; line-height: 1; padding: 0 4px; }
+        .chat-log { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+        .chat-msg { max-width: 86%; padding: 10px 14px; font-size: .92rem; line-height: 1.55; }
+        .chat-msg.bot { background: rgba(255,255,255,.07); color: #eaeaea; border-left: 3px solid var(--red); align-self: flex-start; }
+        .chat-msg.bot a { color: #ff8a90; }
+        .chat-msg.me { background: var(--red); color: #fff; align-self: flex-end; transform: skewX(-4deg); }
+        .chat-msg.me span { display: block; transform: skewX(4deg); }
+        .chat-sugg { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 10px; }
+        .chat-sugg button {
+            font-family: var(--font-cond); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; font-size: .72rem;
+            background: transparent; color: #fff; border: 1px solid var(--red); padding: 5px 10px; cursor: pointer; transform: skewX(-6deg); transition: background .15s;
+        }
+        .chat-sugg button:hover { background: var(--red); }
+        .chat-input { display: flex; border-top: 2px solid var(--red); }
+        .chat-input input { flex: 1; background: #111; border: none; color: #fff; padding: 12px 14px; font-family: var(--font-body); font-size: .92rem; outline: none; }
+        .chat-input button { background: var(--red); color: #fff; border: none; padding: 0 18px; cursor: pointer; font-size: 1.1rem; }
+        .chat-note { font-family: var(--font-cond); font-style: italic; font-size: .6rem; color: #777; text-align: center; padding: 5px; letter-spacing: .5px; }
+        @media (max-width: 560px) { .chat-panel { bottom: 0; right: 0; left: 0; width: 100%; height: 82vh; } .chat-fab { bottom: 16px; right: 16px; padding: 10px 14px; } }
 
         /* ===================== REDUCED MOTION ===================== */
         @media (prefers-reduced-motion: reduce) {
@@ -604,21 +695,43 @@
                 <div class="card reveal"><div class="top"></div><div class="body">
                     <span class="tag">2025 · Edge AI · Enterprise</span><h3>Edge Computer Vision</h3>
                     <p>Real-time surveillance/analytics across multiple NVIDIA Jetson Orin NX nodes — checksum-verified releases, secure Cloudflare Tunnel access.</p>
+                    <div class="metric">
+                        <div><b>4</b><span>Jetson nodes</span></div>
+                        <div><b>Real-time</b><span>inference</span></div>
+                    </div>
+                    <div class="stack"><span>Jetson Orin NX</span><span>YOLO</span><span>Cloudflare Tunnel</span><span>Linux</span></div>
                     <span class="internal"><i class="fas fa-lock"></i> Internal</span>
                 </div></div>
                 <div class="card reveal"><div class="top"></div><div class="body">
                     <span class="tag">2025 · LLM · Enterprise</span><h3>AI Quality-Monitoring</h3>
                     <p>Python + Streamlit on Cloudera ML with Azure OpenAI, applying a structured scoring rubric across quality dimensions.</p>
+                    <div class="metric">
+                        <div><b>20</b><span>param rubric</span></div>
+                        <div><b>3</b><span>quality dims</span></div>
+                    </div>
+                    <div class="stack"><span>Python</span><span>Streamlit</span><span>Azure OpenAI</span><span>Cloudera ML</span></div>
                     <span class="internal"><i class="fas fa-lock"></i> Internal</span>
                 </div></div>
                 <div class="card reveal"><div class="top"></div><div class="body">
                     <span class="tag">2025 · Agentic AI · RAG</span><h3>Multi-Agent Data System</h3>
                     <p>RAG system with specialized agents under an orchestrator for column captioning, NL-to-SQL, and monitoring with semi-automated remediation.</p>
+                    <div class="metric">
+                        <div><b>4+1</b><span>agents + orchestrator</span></div>
+                        <div><b>3</b><span>scopes</span></div>
+                    </div>
+                    <div class="stack"><span>RAG</span><span>LLM Agents</span><span>NL-to-SQL</span><span>Talend</span><span>Datadog</span></div>
                     <span class="internal"><i class="fas fa-lock"></i> Internal</span>
+                </div></div>
+                <div class="card reveal"><div class="top"></div><div class="body">
+                    <span class="tag">AIoT · Chatbot · ML</span><h3>Evergreen</h3>
+                    <p>Smart-agriculture system using AIoT + a chatbot to cut harvest-failure risk — ML over weather, disease, pest &amp; growth data for fully-automatic crop care.</p>
+                    <div class="stack"><span>Python</span><span>Machine Learning</span><span>Chatbot</span><span>AIoT</span></div>
+                    <a class="link" href="https://github.com/AkbarMuh/Evergreen" target="_blank" rel="noopener" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
                 </div></div>
                 <div class="card reveal"><div class="top"></div><div class="body">
                     <span class="tag">2024 · AI · Streamlit</span><h3>KopAI</h3>
                     <p>Personalizes your coffee experience with generative AI, recommendation, and predictive blend analysis.</p>
+                    <div class="stack"><span>Python</span><span>Streamlit</span><span>Generative AI</span></div>
                     <!-- Demo disabled: Streamlit app is login-gated/asleep. Re-enable when public:
                     <a class="link" href="https://kop-ai.streamlit.app/" target="_blank" rel="noopener" data-hover>Steal it <i class="fas fa-arrow-right"></i></a> -->
                     <span class="internal"><i class="fas fa-clock"></i> Demo Offline</span>
@@ -626,16 +739,19 @@
                 <div class="card reveal"><div class="top"></div><div class="body">
                     <span class="tag">2024 · Web · Laravel</span><h3>KODIJA</h3>
                     <p>Cooperative platform for the Communication &amp; Informatics Office of West Java.</p>
+                    <div class="stack"><span>Laravel</span><span>PHP</span><span>MySQL</span></div>
                     <a class="link" href="https://github.com/irizkyw/diskominfo-koperasi" target="_blank" rel="noopener" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
                 </div></div>
                 <div class="card reveal"><div class="top"></div><div class="body">
                     <span class="tag">2024 · Health · AI</span><h3>MealMate</h3>
                     <p>Assists users in making healthy food choices with smart recommendations.</p>
+                    <div class="stack"><span>Laravel</span><span>PHP</span><span>Recommendation</span></div>
                     <a class="link" href="https://github.com/sintiadc/MealMate" target="_blank" rel="noopener" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
                 </div></div>
                 <div class="card reveal"><div class="top"></div><div class="body">
                     <span class="tag">2023 · Dataset · Computer Vision</span><h3>Aksaratara</h3>
                     <p>A place to explore the Indonesian traditional script (Aksara) dataset.</p>
+                    <div class="stack"><span>Computer Vision</span><span>Dataset</span></div>
                     <!-- Demo disabled: aksantara.my.id has an invalid SSL cert (HTTP 526). Re-enable when fixed:
                     <a class="link" href="https://aksantara.my.id" target="_blank" rel="noopener" data-hover>Steal it <i class="fas fa-arrow-right"></i></a> -->
                     <span class="internal"><i class="fas fa-clock"></i> Demo Offline</span>
@@ -643,8 +759,57 @@
                 <div class="card reveal"><div class="top"></div><div class="body">
                     <span class="tag">2022 · Generative AI · Voice</span><h3>Memories</h3>
                     <p>PKMKC project — digital transformation of the Asia-Afrika Bandung Museums with a voice interaction bot.</p>
+                    <div class="stack"><span>Python</span><span>Generative AI</span><span>Voice</span></div>
                     <a class="link" href="https://www.instagram.com/memories.pkmkc/" target="_blank" rel="noopener" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
                 </div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED CASE STUDY -->
+    <section id="casestudy">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <div class="ghost">Deep Dive</div>
+                <div class="title">Case Study</div>
+            </div>
+            <div class="cs-card reveal">
+                <div class="cs-top">
+                    <div>
+                        <h3>Evergreen</h3>
+                        <div class="role">Smart Agriculture · AIoT + Chatbot</div>
+                    </div>
+                    <a class="repo-link" href="https://github.com/AkbarMuh/Evergreen" target="_blank" rel="noopener" data-hover><i class="fab fa-github"></i> View Code</a>
+                </div>
+                <div class="cs-body">
+                    <div class="cs-block">
+                        <h4>Problem</h4>
+                        <p>Smallholder farmers lose yield to unpredictable weather, plant disease, and pests — problems that are hard to catch early without constant expert monitoring.</p>
+                    </div>
+                    <div class="cs-block">
+                        <h4>Approach</h4>
+                        <p>An AIoT system that pairs environment data with ML prediction and a conversational chatbot, so a farmer gets fully-automatic, plain-language guidance instead of raw dashboards.</p>
+                    </div>
+                    <div class="cs-block">
+                        <h4>What I built</h4>
+                        <ul>
+                            <li>Data pipeline over weather, disease, pest &amp; plant-growth datasets</li>
+                            <li>Prediction models for disease / pest / growth risk</li>
+                            <li>A chatbot layer that turns model output into simple advice</li>
+                        </ul>
+                    </div>
+                    <div class="cs-block">
+                        <h4>Outcome &amp; learnings</h4>
+                        <ul>
+                            <li>End-to-end ownership: data → models → chatbot interface</li>
+                            <li>Conversational UX beats dashboards for non-technical users</li>
+                            <li>Became the foundation for my later agentic / LLM work</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cs-stack">
+                    <span>Python</span><span>Machine Learning</span><span>Chatbot / NLP</span><span>AIoT</span><span>Data Pipelines</span>
+                </div>
             </div>
         </div>
     </section>
@@ -718,6 +883,22 @@
             <div class="copyright">© <span id="year"></span> Akbar Muhammad Prakoso · All Rights Reserved</div>
         </div>
     </section>
+
+    <!-- AI CHAT WIDGET (client-side retrieval, no backend) -->
+    <button class="chat-fab" id="chatFab" data-hover aria-label="Ask my portfolio AI"><span><i class="fas fa-robot"></i>&nbsp;Ask my AI</span></button>
+    <div class="chat-panel" id="chatPanel" role="dialog" aria-label="Portfolio assistant">
+        <div class="chat-head">
+            <div class="t">Phantom Assistant<small>Ask about my work · offline retrieval</small></div>
+            <button class="x" id="chatClose" aria-label="close">&times;</button>
+        </div>
+        <div class="chat-log" id="chatLog"></div>
+        <div class="chat-sugg" id="chatSugg"></div>
+        <form class="chat-input" id="chatForm">
+            <input id="chatInput" type="text" placeholder="Ask about my skills, projects…" autocomplete="off" aria-label="message">
+            <button type="submit" aria-label="send"><i class="fas fa-paper-plane"></i></button>
+        </form>
+        <div class="chat-note">Client-side retrieval · no server, no API key · runs in your browser</div>
+    </div>
 
     <a href="#home" class="to-top" id="toTop" data-hover><i class="fas fa-angle-up"></i></a>
     <button class="sfx-toggle" id="sfxToggle" data-hover aria-label="toggle sound"><i class="fas fa-volume-up"></i></button>
@@ -907,6 +1088,106 @@
                 const open = tl.classList.toggle('show-all');
                 btn.querySelector('span').textContent = open ? 'Hide Records ↑' : 'Reveal All Records ↓';
             });
+        })();
+
+        // ===== AI CHAT WIDGET — client-side TF-IDF retrieval over a small profile corpus =====
+        (function () {
+            const fab = document.getElementById('chatFab');
+            const panel = document.getElementById('chatPanel');
+            const closeBtn = document.getElementById('chatClose');
+            const log = document.getElementById('chatLog');
+            const suggWrap = document.getElementById('chatSugg');
+            const form = document.getElementById('chatForm');
+            const input = document.getElementById('chatInput');
+            if (!fab) return;
+
+            // knowledge base: keyword-rich text (for retrieval) + the answer to render
+            const KB = [
+                { t: "akbar muhammad prakoso applied ai engineer bank mandiri enterprise data analytics ai solutions architect agentic llm rag computer vision edge who are you introduce yourself about",
+                  a: "I'm <b>Akbar Muhammad Prakoso</b> — an Applied AI Engineer in Bank Mandiri's Enterprise Data Analytics group, moving toward an AI Solutions Architect track. I build agentic LLM apps, RAG pipelines, and real-time computer vision on edge hardware." },
+                { t: "work experience job role officer rnd strategic project bank mandiri odp officer development program it digital talent msib intern teaching assistant computer vision telkom diskominfo jabar laravel gdsc board member career history",
+                  a: "Experience: <b>Officer, R&D &amp; Strategic Project</b> at Bank Mandiri (Jul 2025–now); before that ODP-IT and an MSIB Digital Talent internship. Also TA for Computer Vision at Telkom University, a Laravel full-stack intern at Diskominfo Jabar, and a GDSC board member." },
+                { t: "education study degree university school telkom informatics computer science bangkit academy machine learning smk telkom malang network engineering graduated",
+                  a: "Education: <b>B.Sc. Informatics (CS), Telkom University (2021–2024)</b>, the Bangkit Academy Machine Learning path, and SMK Telkom Malang (Computer &amp; Network Engineering)." },
+                { t: "ai machine learning skills agentic llm rag retrieval prompt engineering computer vision yolo cnn nlp deep learning azure openai anthropic claude what can you do",
+                  a: "AI skills: <b>Agentic AI, LLM engineering, RAG, prompt engineering, Computer Vision (YOLO/CNN), NLP, Deep Learning</b> — with Azure OpenAI and Anthropic Claude." },
+                { t: "edge ai embedded jetson orin nx jetpack bsp ollama nanollm quantization seeed recomputer local inference hardware",
+                  a: "Edge AI: <b>NVIDIA Jetson Orin NX</b>, JetPack/BSP flashing, local LLM inference (Ollama, NanoLLM), model quantization, Seeed reComputer." },
+                { t: "mlops infrastructure cloudera datadog grafana prometheus cloudflare tunnel linux ubuntu bash monitoring observability devops deployment",
+                  a: "MLOps/Infra: <b>Cloudera ML</b>, observability with Datadog/Grafana/Prometheus, Cloudflare Tunnel, Linux/Ubuntu and Bash automation." },
+                { t: "programming languages frameworks python javascript php sql streamlit laravel react postgresql mysql oracle bigquery databases tech stack code",
+                  a: "Programming: <b>Python, JavaScript, PHP, SQL</b>; frameworks Streamlit, Laravel, React; databases PostgreSQL, MySQL, Oracle, BigQuery." },
+                { t: "edge computer vision project surveillance analytics jetson nodes checksum cloudflare tunnel real time detection cctv",
+                  a: "<b>Edge Computer Vision</b>: real-time surveillance/analytics across 4 NVIDIA Jetson Orin NX nodes, with checksum-verified releases and secure Cloudflare Tunnel access." },
+                { t: "ai quality monitoring streamlit cloudera azure openai scoring rubric call center quality assurance parameters project",
+                  a: "<b>AI Quality-Monitoring</b>: a Python + Streamlit app on Cloudera ML with Azure OpenAI, applying a 20-parameter rubric across 3 quality dimensions." },
+                { t: "multi agent data system rag orchestrator column captioning nl to sql text to sql monitoring remediation agentic project agents",
+                  a: "<b>Multi-Agent Data System</b>: a RAG system where 4 specialized agents under an orchestrator handle column captioning, NL-to-SQL, and monitoring with semi-automated remediation." },
+                { t: "evergreen smart agriculture aiot chatbot farming harvest disease pest weather plant growth prediction crop case study project",
+                  a: "<b>Evergreen</b>: a smart-agriculture AIoT system with a chatbot that predicts disease/pest/growth risk to cut harvest failure. See the full case study on this page, or the code: <a href='https://github.com/AkbarMuh/Evergreen' target='_blank' rel='noopener'>github.com/AkbarMuh/Evergreen</a>." },
+                { t: "kopai coffee generative ai recommendation streamlit blend project",
+                  a: "<b>KopAI</b>: a Streamlit app that personalizes coffee with generative AI, recommendation, and predictive blend analysis." },
+                { t: "projects portfolio work showcase what have you built list",
+                  a: "Highlighted projects: <b>Edge Computer Vision</b>, <b>AI Quality-Monitoring</b>, <b>Multi-Agent Data System</b>, <b>Evergreen</b> (smart agriculture), and <b>KopAI</b>. Scroll to the Heists section for all of them!" },
+                { t: "contact email reach hire linkedin github get in touch message connect talk",
+                  a: "Reach me at <a href='mailto:akbar.muhammt@gmail.com'>akbar.muhammt@gmail.com</a>, <a href='https://www.linkedin.com/in/akbarmuh/' target='_blank' rel='noopener'>LinkedIn</a>, or <a href='https://github.com/AkbarMuh' target='_blank' rel='noopener'>GitHub</a>." },
+                { t: "available availability open to work hire freelance collaboration opportunity job recruiter",
+                  a: "I'm open to collaboration on applied-AI projects — agentic LLM apps, RAG, and computer vision. Reach out via the Contact section!" },
+                { t: "languages speak indonesian english native working proficiency",
+                  a: "Languages: <b>Indonesian</b> (native) and <b>English</b> (working proficiency)." }
+            ];
+
+            const STOP = new Set("a an the of to in on for and or is are am my me you your with at as by be it this that from about who what which how do does can tell".split(" "));
+            const tok = s => s.toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter(w => w && w.length > 1 && !STOP.has(w));
+
+            // build TF-IDF vectors
+            const docs = KB.map(d => tok(d.t));
+            const N = docs.length;
+            const df = {};
+            docs.forEach(ws => new Set(ws).forEach(w => df[w] = (df[w] || 0) + 1));
+            const idf = w => Math.log((N + 1) / ((df[w] || 0) + 1)) + 1;
+            const vecs = docs.map(ws => {
+                const tf = {}; ws.forEach(w => tf[w] = (tf[w] || 0) + 1);
+                const v = {}; Object.keys(tf).forEach(w => v[w] = (tf[w] / ws.length) * idf(w));
+                return v;
+            });
+            function answer(q) {
+                const qw = tok(q);
+                if (!qw.length) return null;
+                let best = 0, bi = -1;
+                vecs.forEach((v, i) => { let s = 0; qw.forEach(w => { if (v[w]) s += v[w]; }); if (s > best) { best = s; bi = i; } });
+                return bi >= 0 ? KB[bi].a : null;
+            }
+
+            const SUGG = ["What are your AI skills?", "Tell me about your projects", "Your experience?", "How can I contact you?"];
+            function renderSugg() {
+                suggWrap.innerHTML = "";
+                SUGG.forEach(q => { const b = document.createElement("button"); b.textContent = q; b.addEventListener("click", () => ask(q)); suggWrap.appendChild(b); });
+            }
+            function bubble(text, who) {
+                const d = document.createElement("div"); d.className = "chat-msg " + who;
+                if (who === "me") { const s = document.createElement("span"); s.textContent = text; d.appendChild(s); }
+                else d.innerHTML = text;
+                log.appendChild(d); log.scrollTop = log.scrollHeight;
+            }
+            function ask(q) {
+                bubble(q, "me");
+                if (SFX && SFX.select) SFX.select();
+                setTimeout(() => {
+                    const a = answer(q);
+                    bubble(a || "Hmm, I don't have that on file — try asking about my <b>skills</b>, <b>projects</b>, <b>experience</b>, or <b>contact</b>.", "bot");
+                }, 260);
+            }
+            let opened = false;
+            function open() {
+                panel.classList.add("open"); fab.classList.add("hide");
+                if (!opened) { opened = true; bubble("Hey! I'm Akbar's portfolio assistant. Ask me anything about his skills, projects, or experience. 🎭", "bot"); renderSugg(); }
+                setTimeout(() => input.focus(), 120);
+            }
+            function close() { panel.classList.remove("open"); fab.classList.remove("hide"); }
+            fab.addEventListener("click", open);
+            closeBtn.addEventListener("click", close);
+            form.addEventListener("submit", e => { e.preventDefault(); const q = input.value.trim(); if (!q) return; input.value = ""; ask(q); });
         })();
 
         document.getElementById('year').textContent = new Date().getFullYear();
