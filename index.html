@@ -33,15 +33,16 @@
 
         html { scroll-behavior: smooth; }
 
+        html { overflow-x: clip; }
         body {
             font-family: var(--font-body);
             background: var(--ink);
             color: var(--white);
-            overflow-x: hidden;
+            overflow-x: clip;
             cursor: none;
         }
 
-        @media (max-width: 900px) { body { cursor: auto; } }
+        @media (max-width: 900px) { body { cursor: auto; } .cursor-dot, .cursor-ring { display: none !important; } }
 
         ::selection { background: var(--red); color: #fff; }
 
@@ -121,7 +122,7 @@
         nav .menu a:hover::before { transform: scaleY(1); }
         nav .menu a span { display: inline-block; transform: skewX(10deg); }
 
-        .burger { display: none; flex-direction: column; gap: 5px; background: var(--red); border: none; padding: 12px; cursor: pointer; transform: skewX(-8deg); }
+        .burger { display: none; flex-direction: column; gap: 5px; background: var(--red); border: 2px solid #fff; padding: 10px; cursor: pointer; transform: skewX(-8deg); box-shadow: 3px 3px 0 rgba(0,0,0,.5); }
         .burger span { width: 26px; height: 3px; background: #fff; display: block; }
 
         @media (max-width: 900px) {
@@ -202,8 +203,8 @@
             font-size: clamp(2.6rem, 8vw, 6rem); letter-spacing: 1px; margin: 6px 0;
         }
         .hero-text h1 .stroke { color: transparent; -webkit-text-stroke: 2px #fff; }
-        .hero-text h1 .word { display: inline-block; animation: dropIn .6s backwards cubic-bezier(.2,1.5,.4,1); }
-        @keyframes dropIn { from { opacity: 0; transform: translateY(-40px) skewX(-14deg) scale(1.4); } }
+        .hero-text h1 .word { display: inline-block; opacity: 0; animation: dropIn .7s both cubic-bezier(.2,1.5,.4,1); }
+        @keyframes dropIn { 0% { opacity: 0; transform: translateY(-40px) skewX(-14deg) scale(1.4); } 100% { opacity: 1; transform: none; } }
         .typed {
             font-family: var(--font-cond); font-weight: 700; font-style: italic; text-transform: uppercase;
             font-size: clamp(1rem, 3vw, 1.6rem); background: #fff; color: var(--ink);
@@ -258,6 +259,19 @@
         .tl .item .org { font-weight: 700; color: var(--red); margin: 2px 0 8px; }
         .tl .item .org small { color: #666; font-weight: 600; }
         .tl .item p { font-size: .98rem; line-height: 1.55; color: #333; }
+        .exp-extra { display: none; }
+        .tl.show-all .exp-extra { display: block; animation: expReveal .45s backwards cubic-bezier(.2,.8,.3,1); }
+        .tl.show-all .exp-extra:nth-of-type(5) { animation-delay: .06s; }
+        .tl.show-all .exp-extra:nth-of-type(6) { animation-delay: .12s; }
+        @keyframes expReveal { from { opacity: 0; transform: translateY(22px) skewX(-4deg); } }
+        .expand-btn {
+            margin: 6px 0 0 26px; font-family: var(--font-cond); font-weight: 700; font-style: italic;
+            text-transform: uppercase; letter-spacing: 1.5px; font-size: 1.05rem; cursor: pointer;
+            background: var(--red); color: #fff; border: 3px solid var(--ink); padding: 10px 22px;
+            transform: skewX(-8deg); box-shadow: 5px 5px 0 var(--ink); transition: transform .15s, background .2s;
+        }
+        .expand-btn span { display: inline-block; transform: skewX(8deg); }
+        .expand-btn:hover { transform: skewX(-8deg) translate(-2px,-2px); background: var(--ink); }
 
         /* ===================== PROJECTS ===================== */
         #project { background: var(--ink); }
@@ -333,12 +347,46 @@
 
         @media (max-width: 860px) {
             .hero-grid, .about-grid, .qual-grid, .skill-grid, .contact-grid { grid-template-columns: 1fr; }
+            .hero-grid { gap: 10px; }
             .hero-text { text-align: center; order: 2; }
-            .hero-photo { order: 1; }
+            .hero-photo { order: 1; margin-bottom: 14px; }
+            .hero-photo img { box-shadow: 8px 8px 0 var(--ink); }
+            #home { padding-top: 100px; }
             #home::after { display: none; }
             .cta { justify-content: center; }
             .info-grid { grid-template-columns: 1fr; }
-            section { padding: 70px 20px; }
+            .qual-grid { gap: 46px; }
+            .about-photo { max-width: 420px; margin: 0 auto; }
+            section { padding: 72px 20px; }
+        }
+
+        @media (max-width: 560px) {
+            nav { padding: 10px 14px; }
+            nav .brand { font-size: 1.5rem; padding: 3px 12px 1px; }
+            section { padding: 60px 16px; }
+            .sec-head { margin-bottom: 44px; }
+            .sec-head .title { font-size: 1.35rem; padding: 5px 14px; left: 6px; }
+            .hero-text .hi { font-size: 1.2rem; }
+            .typed { font-size: 1rem; }
+            .btn-p5 { font-size: .95rem; padding: 11px 16px; box-shadow: 4px 4px 0 var(--ink); text-align: center; width: 80%; }
+            .cta { flex-direction: column; align-items: center; gap: 12px; }
+            .hero-photo .badge { font-size: .9rem; left: 0; }
+            .about-text p { font-size: 1.02rem; }
+            .col-title { font-size: 1.6rem; }
+            .tl { padding-left: 22px; }
+            .tl .item { padding: 14px 16px; box-shadow: 4px 4px 0 var(--ink); }
+            .tl .item h4 { font-size: 1.15rem; }
+            .expand-btn { margin-left: 22px; font-size: .95rem; padding: 9px 18px; width: calc(100% - 22px); }
+            .proj-grid { grid-template-columns: 1fr; gap: 20px; }
+            .card { clip-path: polygon(0 0, 100% 0, 100% 92%, 95% 100%, 0 100%); }
+            .contact-card { transform: none; box-shadow: 6px 6px 0 rgba(0,0,0,.4); }
+            .contact-card > * { transform: none; }
+            .contact-grid h2 { -webkit-text-stroke: 0; }
+            .socials a { width: 48px; height: 48px; }
+            .copyright { font-size: .8rem; letter-spacing: 1px; margin-top: 40px; }
+            .to-top { width: 46px; height: 46px; bottom: 16px; right: 16px; }
+            .float-star { display: none; }
+            #splash h1 { -webkit-text-stroke: 1px #000; }
         }
     </style>
 </head>
@@ -462,22 +510,23 @@
                             <div class="org">Bank Mandiri (Persero) Tbk <small>· Sep 2024 – Jan 2025</small></div>
                             <p>Enterprise AI in conversational AI, RAG platforms &amp; AI-assisted software delivery.</p>
                         </div>
-                        <div class="item">
+                        <div class="item exp-extra">
                             <h4>Teaching Assistant, Computer Vision</h4>
                             <div class="org">Telkom University <small>· Feb 2025 – Jul 2025</small></div>
                             <p>Assisted teaching and lab sessions for the Computer Vision course.</p>
                         </div>
-                        <div class="item">
+                        <div class="item exp-extra">
                             <h4>Full Stack Web Developer (Intern)</h4>
                             <div class="org">Diskominfo Jabar <small>· Jul 2024 – Sep 2024</small></div>
                             <p>Built web features with Laravel for the Communication &amp; Informatics Office of West Java.</p>
                         </div>
-                        <div class="item">
+                        <div class="item exp-extra">
                             <h4>Board Member</h4>
                             <div class="org">Google Developer Student Clubs, Telkom Univ <small>· Nov 2023 – Sep 2024</small></div>
                             <p>Organized technical programs and community activities for student developers.</p>
                         </div>
                     </div>
+                    <button class="expand-btn" id="expBtn" data-hover><span>Reveal All Records ↓</span></button>
                 </div>
             </div>
         </div>
@@ -493,44 +542,44 @@
             </div>
             <div class="proj-grid">
                 <div class="card reveal"><div class="top"></div><div class="body">
-                    <span class="tag">AI · Streamlit</span><h3>KopAI</h3>
-                    <p>Personalizes your coffee experience with generative AI, recommendation, and predictive blend analysis.</p>
-                    <a class="link" href="https://kop-ai.streamlit.app/" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
-                </div></div>
-                <div class="card reveal"><div class="top"></div><div class="body">
-                    <span class="tag">Generative AI · Voice</span><h3>Memories</h3>
-                    <p>PKMKC project — digital transformation of the Asia-Afrika Bandung Museums with a voice interaction bot.</p>
-                    <a class="link" href="https://www.instagram.com/memories.pkmkc/" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
-                </div></div>
-                <div class="card reveal"><div class="top"></div><div class="body">
-                    <span class="tag">Dataset · Computer Vision</span><h3>Aksaratara</h3>
-                    <p>A place to explore the Indonesian traditional script (Aksara) dataset.</p>
-                    <a class="link" href="https://aksantara.my.id" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
-                </div></div>
-                <div class="card reveal"><div class="top"></div><div class="body">
-                    <span class="tag">Web · Laravel</span><h3>KODIJA</h3>
-                    <p>Cooperative platform for the Communication &amp; Informatics Office of West Java.</p>
-                    <a class="link" href="https://github.com/irizkyw/diskominfo-koperasi" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
-                </div></div>
-                <div class="card reveal"><div class="top"></div><div class="body">
-                    <span class="tag">Health · AI</span><h3>MealMate</h3>
-                    <p>Assists users in making healthy food choices with smart recommendations.</p>
-                    <a class="link" href="https://github.com/sintiadc/MealMate" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
-                </div></div>
-                <div class="card reveal"><div class="top"></div><div class="body">
-                    <span class="tag">Edge AI · Enterprise</span><h3>Edge Computer Vision</h3>
+                    <span class="tag">2025 · Edge AI · Enterprise</span><h3>Edge Computer Vision</h3>
                     <p>Real-time surveillance/analytics across multiple NVIDIA Jetson Orin NX nodes — checksum-verified releases, secure Cloudflare Tunnel access.</p>
                     <span class="internal"><i class="fas fa-lock"></i> Internal</span>
                 </div></div>
                 <div class="card reveal"><div class="top"></div><div class="body">
-                    <span class="tag">LLM · Enterprise</span><h3>AI Quality-Monitoring</h3>
+                    <span class="tag">2025 · LLM · Enterprise</span><h3>AI Quality-Monitoring</h3>
                     <p>Python + Streamlit on Cloudera ML with Azure OpenAI, applying a structured scoring rubric across quality dimensions.</p>
                     <span class="internal"><i class="fas fa-lock"></i> Internal</span>
                 </div></div>
                 <div class="card reveal"><div class="top"></div><div class="body">
-                    <span class="tag">Agentic AI · RAG</span><h3>Multi-Agent Data System</h3>
+                    <span class="tag">2025 · Agentic AI · RAG</span><h3>Multi-Agent Data System</h3>
                     <p>RAG system with specialized agents under an orchestrator for column captioning, NL-to-SQL, and monitoring with semi-automated remediation.</p>
                     <span class="internal"><i class="fas fa-lock"></i> Internal</span>
+                </div></div>
+                <div class="card reveal"><div class="top"></div><div class="body">
+                    <span class="tag">2024 · AI · Streamlit</span><h3>KopAI</h3>
+                    <p>Personalizes your coffee experience with generative AI, recommendation, and predictive blend analysis.</p>
+                    <a class="link" href="https://kop-ai.streamlit.app/" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
+                </div></div>
+                <div class="card reveal"><div class="top"></div><div class="body">
+                    <span class="tag">2024 · Web · Laravel</span><h3>KODIJA</h3>
+                    <p>Cooperative platform for the Communication &amp; Informatics Office of West Java.</p>
+                    <a class="link" href="https://github.com/irizkyw/diskominfo-koperasi" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
+                </div></div>
+                <div class="card reveal"><div class="top"></div><div class="body">
+                    <span class="tag">2024 · Health · AI</span><h3>MealMate</h3>
+                    <p>Assists users in making healthy food choices with smart recommendations.</p>
+                    <a class="link" href="https://github.com/sintiadc/MealMate" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
+                </div></div>
+                <div class="card reveal"><div class="top"></div><div class="body">
+                    <span class="tag">2023 · Dataset · Computer Vision</span><h3>Aksaratara</h3>
+                    <p>A place to explore the Indonesian traditional script (Aksara) dataset.</p>
+                    <a class="link" href="https://aksantara.my.id" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
+                </div></div>
+                <div class="card reveal"><div class="top"></div><div class="body">
+                    <span class="tag">2022 · Generative AI · Voice</span><h3>Memories</h3>
+                    <p>PKMKC project — digital transformation of the Asia-Afrika Bandung Museums with a voice interaction bot.</p>
+                    <a class="link" href="https://www.instagram.com/memories.pkmkc/" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
                 </div></div>
             </div>
         </div>
@@ -609,14 +658,20 @@
     <a href="#home" class="to-top" id="toTop" data-hover><i class="fas fa-angle-up"></i></a>
 
     <script>
-        // ===== SPLASH =====
-        window.addEventListener('load', () => {
-            setTimeout(() => {
+        // ===== SPLASH ===== (timer-driven with load + hard fallback so it never sticks)
+        (function () {
+            let gone = false;
+            function hideSplash() {
+                if (gone) return; gone = true;
                 const s = document.getElementById('splash');
+                if (!s) return;
                 s.classList.add('done');
-                setTimeout(() => s.style.display = 'none', 700);
-            }, 1400);
-        });
+                setTimeout(() => { s.style.display = 'none'; }, 700);
+            }
+            window.addEventListener('load', () => setTimeout(hideSplash, 1400));
+            // fallback: fire regardless of whether load/CDN resolves
+            setTimeout(hideSplash, 2200);
+        })();
 
         // ===== HERO NAME STAGGER =====
         (function () {
@@ -686,6 +741,17 @@
             document.querySelectorAll('a, button, [data-hover], .chip, .card, .tl .item').forEach(el => {
                 el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
                 el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
+            });
+        })();
+
+        // ===== EXPERIENCE EXPAND =====
+        (function () {
+            const btn = document.getElementById('expBtn');
+            if (!btn) return;
+            const tl = btn.previousElementSibling;
+            btn.addEventListener('click', () => {
+                const open = tl.classList.toggle('show-all');
+                btn.querySelector('span').textContent = open ? 'Hide Records ↑' : 'Reveal All Records ↓';
             });
         })();
 
