@@ -7,7 +7,20 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Akbar Muhammad Prakoso — Applied AI Engineer. Persona 5 styled portfolio." name="description">
 
-    <link href="img/favicon.ico" rel="icon">
+    <!-- Open Graph / social preview (update URLs if repo is renamed to akbarmuh.github.io) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Akbar Muhammad Prakoso — Applied AI Engineer">
+    <meta property="og:description" content="Applied AI Engineer building agentic LLM apps, RAG pipelines & real-time computer vision on edge hardware.">
+    <meta property="og:url" content="https://akbarmuh.github.io/Folio/">
+    <meta property="og:image" content="https://akbarmuh.github.io/Folio/img/profile.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Akbar Muhammad Prakoso — Applied AI Engineer">
+    <meta name="twitter:description" content="Applied AI Engineer building agentic LLM apps, RAG pipelines & real-time computer vision on edge hardware.">
+    <meta name="twitter:image" content="https://akbarmuh.github.io/Folio/img/profile.jpg">
+    <link rel="canonical" href="https://akbarmuh.github.io/Folio/">
+
+    <!-- Favicon: inline SVG (red Phantom star) — no external file needed -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0a'/%3E%3Cpath d='M16 3L19.06 11.79L28.36 11.98L20.95 17.61L23.64 26.52L16 21.2L8.36 26.52L11.05 17.61L3.64 11.98L12.94 11.79Z' fill='%23e60012'/%3E%3C/svg%3E">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,10 +52,7 @@
             background: var(--ink);
             color: var(--white);
             overflow-x: clip;
-            cursor: none;
         }
-
-        @media (max-width: 900px) { body { cursor: auto; } .cursor-dot, #maskCursor { display: none !important; } }
 
         ::selection { background: var(--red); color: #fff; }
 
@@ -51,19 +61,6 @@
             background-image: radial-gradient(rgba(255,255,255,0.14) 1.4px, transparent 1.5px);
             background-size: 10px 10px;
         }
-
-        /* ===================== CUSTOM CURSOR (Phantom Thief mask) ===================== */
-        .cursor-dot {
-            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999;
-            width: 7px; height: 7px; border-radius: 50%; background: var(--red);
-            transform: translate(-50%, -50%); box-shadow: 0 0 6px rgba(230,0,18,.9);
-        }
-        #maskCursor {
-            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99998;
-            width: 46px; height: auto; transform: translate(-50%, -50%) rotate(-8deg);
-            transition: width .18s, filter .18s; filter: drop-shadow(2px 3px 0 rgba(0,0,0,.4));
-        }
-        #maskCursor.hovering { width: 68px; filter: drop-shadow(0 0 8px var(--red)); }
 
         /* ===================== ALL-OUT ATTACK TRANSITION ===================== */
         #aoa { position: fixed; inset: 0; z-index: 95000; pointer-events: none; display: none; overflow: hidden; }
@@ -121,7 +118,7 @@
             overflow: hidden;
         }
         #splash .mask-star { position: absolute; opacity: .18; }
-        #splash h1 {
+        #splash .splash-title {
             font-family: var(--font-display); color: #fff;
             font-size: clamp(3.5rem, 16vw, 14rem); line-height: .85;
             transform: skewX(-10deg) scale(1.2); letter-spacing: 2px;
@@ -129,7 +126,7 @@
             -webkit-text-stroke: 2px #000;
             animation: splashPunch .7s cubic-bezier(.2,1.4,.4,1) forwards;
         }
-        #splash h1 span { display: block; font-size: .28em; -webkit-text-stroke: 1px #000; letter-spacing: 6px; }
+        #splash .splash-title span { display: block; font-size: .28em; -webkit-text-stroke: 1px #000; letter-spacing: 6px; }
         @keyframes splashPunch {
             0% { transform: skewX(-10deg) scale(2.5); opacity: 0; }
             60% { transform: skewX(-10deg) scale(1.1); opacity: 1; }
@@ -434,19 +431,21 @@
             .copyright { font-size: .8rem; letter-spacing: 1px; margin-top: 40px; }
             .to-top { width: 46px; height: 46px; bottom: 16px; right: 16px; }
             .float-star { display: none; }
-            #splash h1 { -webkit-text-stroke: 1px #000; }
+            #splash .splash-title { -webkit-text-stroke: 1px #000; }
+        }
+
+        /* ===================== REDUCED MOTION ===================== */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            html { scroll-behavior: auto; }
+            #splash { display: none !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+            .hero-text h1 .word { opacity: 1 !important; }
         }
     </style>
 </head>
 
 <body>
-
-    <!-- CURSOR -->
-    <div class="cursor-dot"></div>
-    <svg id="maskCursor" viewBox="0 0 64 32" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#ffffff" stroke="#111111" stroke-width="2" stroke-linejoin="round" fill-rule="evenodd"
-            d="M3 9 C3 3 13 2 20 5 L28 8.5 C31 9.7 33 9.7 36 8.5 L44 5 C51 2 61 3 61 9 C61 22 49 28 41 23 C36.5 20 34 16 32 16 C30 16 27.5 20 23 23 C15 28 3 22 3 9 Z M9 12 a5 3.2 0 1 1 10 0 a5 3.2 0 1 1 -10 0 Z M45 12 a5 3.2 0 1 1 10 0 a5 3.2 0 1 1 -10 0 Z" />
-    </svg>
 
     <!-- ALL-OUT ATTACK TRANSITION -->
     <div id="aoa" aria-hidden="true">
@@ -458,7 +457,7 @@
 
     <!-- SPLASH -->
     <div id="splash" class="halftone">
-        <h1>SHOWTIME<span>TAKE YOUR HEART</span></h1>
+        <div class="splash-title">SHOWTIME<span>TAKE YOUR HEART</span></div>
     </div>
 
     <!-- NAV -->
@@ -488,9 +487,11 @@
                     <h1 id="heroName" aria-label="Akbar Muhammad Prakoso"></h1>
                     <span class="typed" id="typed"></span>
                     <div class="cta reveal">
-                        <a class="btn-p5" href="https://drive.google.com/file/d/1kGcak3d9O2Y1vx96MKa9Lq3WlOKYoyYZ/view?usp=sharing" target="_blank" data-hover><span>Download CV</span></a>
-                        <a class="btn-p5 dark" href="https://github.com/AkbarMuh/" target="_blank" data-hover><span><i class="fab fa-github"></i> Github</span></a>
-                        <a class="btn-p5 dark" href="https://www.linkedin.com/in/akbar-muhammad-205616197/" target="_blank" data-hover><span><i class="fab fa-linkedin-in"></i> LinkedIn</span></a>
+                        <!-- CV disabled: set Google Drive sharing to "Anyone with the link", then re-enable:
+                        <a class="btn-p5" href="https://drive.google.com/file/d/1kGcak3d9O2Y1vx96MKa9Lq3WlOKYoyYZ/view?usp=sharing" target="_blank" rel="noopener" data-hover><span>Download CV</span></a>
+                        -->
+                        <a class="btn-p5 dark" href="https://github.com/AkbarMuh/" target="_blank" rel="noopener" data-hover><span><i class="fab fa-github"></i> Github</span></a>
+                        <a class="btn-p5 dark" href="https://www.linkedin.com/in/akbar-muhammad-205616197/" target="_blank" rel="noopener" data-hover><span><i class="fab fa-linkedin-in"></i> LinkedIn</span></a>
                     </div>
                 </div>
             </div>
@@ -515,7 +516,7 @@
                         <div class="cell"><b>Birthday</b><span>April 9, 2003</span></div>
                         <div class="cell"><b>Role</b><span>Applied AI Engineer</span></div>
                         <div class="cell"><b>Degree</b><span>B.Sc. Informatics (CS)</span></div>
-                        <div class="cell"><b>Email</b><span>akbar.muhammad@gmail.com</span></div>
+                        <div class="cell"><b>Email</b><span>akbar.muhammt@gmail.com</span></div>
                         <div class="cell"><b>Location</b><span>Indonesia</span></div>
                     </div>
                 </div>
@@ -618,27 +619,31 @@
                 <div class="card reveal"><div class="top"></div><div class="body">
                     <span class="tag">2024 · AI · Streamlit</span><h3>KopAI</h3>
                     <p>Personalizes your coffee experience with generative AI, recommendation, and predictive blend analysis.</p>
-                    <a class="link" href="https://kop-ai.streamlit.app/" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
+                    <!-- Demo disabled: Streamlit app is login-gated/asleep. Re-enable when public:
+                    <a class="link" href="https://kop-ai.streamlit.app/" target="_blank" rel="noopener" data-hover>Steal it <i class="fas fa-arrow-right"></i></a> -->
+                    <span class="internal"><i class="fas fa-clock"></i> Demo Offline</span>
                 </div></div>
                 <div class="card reveal"><div class="top"></div><div class="body">
                     <span class="tag">2024 · Web · Laravel</span><h3>KODIJA</h3>
                     <p>Cooperative platform for the Communication &amp; Informatics Office of West Java.</p>
-                    <a class="link" href="https://github.com/irizkyw/diskominfo-koperasi" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
+                    <a class="link" href="https://github.com/irizkyw/diskominfo-koperasi" target="_blank" rel="noopener" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
                 </div></div>
                 <div class="card reveal"><div class="top"></div><div class="body">
                     <span class="tag">2024 · Health · AI</span><h3>MealMate</h3>
                     <p>Assists users in making healthy food choices with smart recommendations.</p>
-                    <a class="link" href="https://github.com/sintiadc/MealMate" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
+                    <a class="link" href="https://github.com/sintiadc/MealMate" target="_blank" rel="noopener" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
                 </div></div>
                 <div class="card reveal"><div class="top"></div><div class="body">
                     <span class="tag">2023 · Dataset · Computer Vision</span><h3>Aksaratara</h3>
                     <p>A place to explore the Indonesian traditional script (Aksara) dataset.</p>
-                    <a class="link" href="https://aksantara.my.id" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
+                    <!-- Demo disabled: aksantara.my.id has an invalid SSL cert (HTTP 526). Re-enable when fixed:
+                    <a class="link" href="https://aksantara.my.id" target="_blank" rel="noopener" data-hover>Steal it <i class="fas fa-arrow-right"></i></a> -->
+                    <span class="internal"><i class="fas fa-clock"></i> Demo Offline</span>
                 </div></div>
                 <div class="card reveal"><div class="top"></div><div class="body">
                     <span class="tag">2022 · Generative AI · Voice</span><h3>Memories</h3>
                     <p>PKMKC project — digital transformation of the Asia-Afrika Bandung Museums with a voice interaction bot.</p>
-                    <a class="link" href="https://www.instagram.com/memories.pkmkc/" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
+                    <a class="link" href="https://www.instagram.com/memories.pkmkc/" target="_blank" rel="noopener" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
                 </div></div>
             </div>
         </div>
@@ -698,16 +703,16 @@
                     <h2>Let's Take<br>Your Heart</h2>
                     <p>Applied AI Engineer building agentic LLM apps, RAG pipelines &amp; real-time computer vision on edge hardware. Open to collaboration on applied-AI projects.</p>
                     <div class="socials">
-                        <a href="https://www.linkedin.com/in/akbar-muhammad-205616197/" target="_blank" data-hover><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://github.com/AkbarMuh/" target="_blank" data-hover><i class="fab fa-github"></i></a>
-                        <a href="mailto:akbar.muhammad@gmail.com" data-hover><i class="fas fa-envelope"></i></a>
+                        <a href="https://www.linkedin.com/in/akbar-muhammad-205616197/" target="_blank" rel="noopener" data-hover><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/AkbarMuh/" target="_blank" rel="noopener" data-hover><i class="fab fa-github"></i></a>
+                        <a href="mailto:akbar.muhammt@gmail.com" data-hover><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
                 <div class="contact-card reveal">
                     <div class="row"><i class="fas fa-map-marker-alt"></i><span>Indonesia</span></div>
-                    <div class="row"><i class="fas fa-envelope"></i><a href="mailto:akbar.muhammad@gmail.com" data-hover>akbar.muhammad@gmail.com</a></div>
-                    <div class="row"><i class="fab fa-github"></i><a href="https://github.com/AkbarMuh/" target="_blank" data-hover>github.com/AkbarMuh</a></div>
-                    <div class="row"><i class="fab fa-linkedin-in"></i><a href="https://www.linkedin.com/in/akbar-muhammad-205616197/" target="_blank" data-hover>in/akbar-muhammad</a></div>
+                    <div class="row"><i class="fas fa-envelope"></i><a href="mailto:akbar.muhammt@gmail.com" data-hover>akbar.muhammt@gmail.com</a></div>
+                    <div class="row"><i class="fab fa-github"></i><a href="https://github.com/AkbarMuh/" target="_blank" rel="noopener" data-hover>github.com/AkbarMuh</a></div>
+                    <div class="row"><i class="fab fa-linkedin-in"></i><a href="https://www.linkedin.com/in/akbar-muhammad-205616197/" target="_blank" rel="noopener" data-hover>in/akbar-muhammad</a></div>
                 </div>
             </div>
             <div class="copyright">© <span id="year"></span> Akbar Muhammad Prakoso · All Rights Reserved</div>
@@ -825,30 +830,15 @@
             });
         })();
 
-        // ===== CUSTOM CURSOR (Phantom Thief mask) =====
+        // ===== HOVER SFX (subtle blip on interactive elements — normal cursor kept) =====
         (function () {
             if (window.matchMedia('(max-width: 900px)').matches) return;
-            const dot = document.querySelector('.cursor-dot');
-            const mask = document.getElementById('maskCursor');
-            let rx = 0, ry = 0, mx = 0, my = 0;
-            window.addEventListener('mousemove', e => {
-                mx = e.clientX; my = e.clientY;
-                dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-            });
-            function loop() {
-                rx += (mx - rx) * 0.2; ry += (my - ry) * 0.2;
-                mask.style.left = rx + 'px'; mask.style.top = ry + 'px';
-                requestAnimationFrame(loop);
-            }
-            loop();
             let lastHover = 0;
             document.querySelectorAll('a, button, [data-hover], .chip, .card, .tl .item').forEach(el => {
                 el.addEventListener('mouseenter', () => {
-                    mask.classList.add('hovering');
                     const now = Date.now();
                     if (now - lastHover > 60) { SFX.hover(); lastHover = now; }
                 });
-                el.addEventListener('mouseleave', () => mask.classList.remove('hovering'));
             });
         })();
 
