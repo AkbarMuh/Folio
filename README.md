@@ -3,7 +3,7 @@
 Personal portfolio of **Akbar Muhammad Prakoso**, Applied AI Engineer.
 A single-page, **Persona 5-styled** site built with plain HTML, CSS, and vanilla JavaScript — no build step, no framework.
 
-🔗 **Live:** https://akbarmuh.github.io/Folio/
+🔗 **Live:** https://akbarmuh.github.io/
 
 ## Features
 - Fully self-contained `index.html` (inline CSS + JS)

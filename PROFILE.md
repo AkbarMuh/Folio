@@ -2,7 +2,7 @@
 
 **Applied AI Engineer** moving toward an **AI Solutions Architect** track. I build and ship end-to-end AI systems — from agentic LLM applications and RAG pipelines to real-time computer vision deployed on edge hardware.
 
-- 🌐 Portfolio: https://akbarmuh.github.io/Folio/
+- 🌐 Portfolio: https://akbarmuh.github.io/
 - 💻 GitHub: [@AkbarMuh](https://github.com/AkbarMuh)
 - 📍 Indonesia
 
