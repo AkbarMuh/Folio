@@ -3,429 +3,694 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Akbar Muhammad Prakoso - Portfolio</title>
+    <title>AKBAR PRAKOSO // TAKE YOUR HEART</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Akbar Muhammad Prakoso Portfolio" name="description">
+    <meta content="Akbar Muhammad Prakoso — Applied AI Engineer. Persona 5 styled portfolio." name="description">
 
-    <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;1,600;1,700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --red: #e60012;
+            --red-deep: #b3000e;
+            --ink: #0a0a0a;
+            --paper: #f4f1ea;
+            --white: #ffffff;
+            --font-display: 'Anton', sans-serif;
+            --font-cond: 'Barlow Condensed', sans-serif;
+            --font-body: 'Barlow', sans-serif;
+        }
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--ink);
+            color: var(--white);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        @media (max-width: 900px) { body { cursor: auto; } }
+
+        ::selection { background: var(--red); color: #fff; }
+
+        /* halftone dot texture helper */
+        .halftone {
+            background-image: radial-gradient(rgba(255,255,255,0.14) 1.4px, transparent 1.5px);
+            background-size: 10px 10px;
+        }
+
+        /* ===================== CUSTOM CURSOR ===================== */
+        .cursor-dot, .cursor-ring {
+            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999;
+            transform: translate(-50%, -50%); border-radius: 50%;
+            mix-blend-mode: difference;
+        }
+        .cursor-dot { width: 8px; height: 8px; background: var(--white); }
+        .cursor-ring {
+            width: 34px; height: 34px; border: 2px solid var(--white);
+            transition: width .18s, height .18s, background .18s;
+        }
+        .cursor-ring.hovering { width: 54px; height: 54px; background: rgba(230,0,18,.35); border-color: var(--red); }
+
+        /* ===================== INTRO SPLASH ===================== */
+        #splash {
+            position: fixed; inset: 0; z-index: 100000;
+            background: var(--red);
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        #splash .mask-star { position: absolute; opacity: .18; }
+        #splash h1 {
+            font-family: var(--font-display); color: #fff;
+            font-size: clamp(3.5rem, 16vw, 14rem); line-height: .85;
+            transform: skewX(-10deg) scale(1.2); letter-spacing: 2px;
+            text-align: center;
+            -webkit-text-stroke: 2px #000;
+            animation: splashPunch .7s cubic-bezier(.2,1.4,.4,1) forwards;
+        }
+        #splash h1 span { display: block; font-size: .28em; -webkit-text-stroke: 1px #000; letter-spacing: 6px; }
+        @keyframes splashPunch {
+            0% { transform: skewX(-10deg) scale(2.5); opacity: 0; }
+            60% { transform: skewX(-10deg) scale(1.1); opacity: 1; }
+            100% { transform: skewX(-10deg) scale(1.2); opacity: 1; }
+        }
+        #splash.done { animation: splashOut .7s cubic-bezier(.7,0,.3,1) forwards; }
+        @keyframes splashOut {
+            to { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); transform: translateY(-100%) skewY(-4deg); }
+        }
+
+        /* ===================== NAVBAR ===================== */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 9000;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 30px; transition: background .3s, padding .3s;
+        }
+        nav.scrolled { background: rgba(10,10,10,.9); padding: 8px 30px; backdrop-filter: blur(6px); }
+        nav .brand {
+            font-family: var(--font-display); font-size: 1.9rem; color: #fff;
+            text-decoration: none; transform: skewX(-8deg); letter-spacing: 1px;
+            background: var(--red); padding: 4px 16px 2px;
+            clip-path: polygon(6% 0, 100% 0, 94% 100%, 0% 100%);
+        }
+        nav .brand span { color: #000; }
+        nav .menu { display: flex; gap: 6px; }
+        nav .menu a {
+            font-family: var(--font-cond); font-weight: 700; font-style: italic;
+            text-transform: uppercase; letter-spacing: 1px; font-size: 1.05rem;
+            color: #fff; text-decoration: none; padding: 8px 18px;
+            transform: skewX(-10deg); position: relative; transition: color .2s;
+            border: 2px solid transparent;
+        }
+        nav .menu a::before {
+            content: ''; position: absolute; inset: 0; background: var(--red);
+            transform: scaleY(0); transform-origin: bottom; transition: transform .2s; z-index: -1;
+        }
+        nav .menu a:hover { color: #fff; }
+        nav .menu a:hover::before { transform: scaleY(1); }
+        nav .menu a span { display: inline-block; transform: skewX(10deg); }
+
+        .burger { display: none; flex-direction: column; gap: 5px; background: var(--red); border: none; padding: 12px; cursor: pointer; transform: skewX(-8deg); }
+        .burger span { width: 26px; height: 3px; background: #fff; display: block; }
+
+        @media (max-width: 900px) {
+            nav .menu {
+                position: fixed; top: 0; right: 0; height: 100vh; width: min(78vw, 340px);
+                background: var(--red); flex-direction: column; justify-content: center;
+                padding: 40px; gap: 14px; transform: translateX(100%); transition: transform .4s cubic-bezier(.7,0,.3,1);
+            }
+            nav .menu.open { transform: translateX(0); }
+            nav .menu a { font-size: 1.8rem; color: #fff; }
+            nav .menu a::before { background: #000; }
+            .burger { display: flex; z-index: 9500; }
+        }
+
+        /* ===================== SECTION SHELL ===================== */
+        section { position: relative; padding: 100px 30px; overflow: hidden; }
+        .wrap { max-width: 1150px; margin: 0 auto; position: relative; z-index: 2; }
+
+        .sec-head { position: relative; margin-bottom: 60px; }
+        .sec-head .ghost {
+            font-family: var(--font-display); font-size: clamp(4rem, 15vw, 11rem);
+            color: transparent; -webkit-text-stroke: 2px rgba(255,255,255,.12);
+            line-height: .8; text-transform: uppercase; letter-spacing: 2px;
+        }
+        .sec-head .title {
+            position: absolute; bottom: 6px; left: 12px;
+            font-family: var(--font-display); font-size: clamp(1.6rem, 5vw, 3rem);
+            background: var(--red); color: #fff; padding: 6px 22px 2px;
+            transform: skewX(-8deg); text-transform: uppercase; letter-spacing: 1px;
+            clip-path: polygon(4% 0, 100% 0, 96% 100%, 0% 100%);
+        }
+
+        /* diagonal red band divider */
+        .band {
+            position: absolute; left: -10%; width: 120%; height: 70px; background: var(--red);
+            transform: rotate(-3deg); z-index: 1; opacity: .95;
+        }
+
+        /* reveal animation */
+        .reveal { opacity: 0; transform: translateY(50px) skewX(-4deg); transition: all .7s cubic-bezier(.2,.8,.3,1); }
+        .reveal.in { opacity: 1; transform: none; }
+
+        /* ===================== HERO ===================== */
+        #home {
+            min-height: 100vh; display: flex; align-items: center;
+            background:
+                repeating-linear-gradient(115deg, rgba(230,0,18,.9) 0 60px, rgba(179,0,14,.9) 60px 120px);
+            padding-top: 90px;
+        }
+        #home::before {
+            content: ''; position: absolute; inset: 0;
+            background-image: radial-gradient(rgba(0,0,0,.35) 2px, transparent 2.2px);
+            background-size: 14px 14px; mix-blend-mode: multiply; opacity: .5;
+        }
+        #home::after {
+            content: ''; position: absolute; right: -8%; top: 0; width: 55%; height: 100%;
+            background: var(--ink); transform: skewX(-12deg); z-index: 1;
+        }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; }
+        .hero-photo { position: relative; z-index: 3; justify-self: center; }
+        .hero-photo img {
+            width: min(360px, 78vw); aspect-ratio: 1; object-fit: cover;
+            border: 5px solid #fff; filter: grayscale(20%) contrast(1.1);
+            clip-path: polygon(8% 0, 100% 4%, 92% 100%, 0% 94%);
+            box-shadow: 14px 14px 0 var(--ink);
+            animation: floaty 5s ease-in-out infinite;
+        }
+        @keyframes floaty { 50% { transform: translateY(-14px) rotate(-1deg); } }
+        .hero-photo .badge {
+            position: absolute; bottom: -18px; left: -18px; background: #fff; color: var(--ink);
+            font-family: var(--font-display); padding: 8px 18px; transform: skewX(-10deg) rotate(-4deg);
+            font-size: 1.1rem; box-shadow: 5px 5px 0 var(--ink);
+        }
+        .hero-text { position: relative; z-index: 3; }
+        .hero-text .hi { font-family: var(--font-cond); font-style: italic; font-weight: 700; font-size: 1.6rem; letter-spacing: 3px; text-transform: uppercase; }
+        .hero-text h1 {
+            font-family: var(--font-display); line-height: .9; text-transform: uppercase;
+            font-size: clamp(2.6rem, 8vw, 6rem); letter-spacing: 1px; margin: 6px 0;
+        }
+        .hero-text h1 .stroke { color: transparent; -webkit-text-stroke: 2px #fff; }
+        .hero-text h1 .word { display: inline-block; animation: dropIn .6s backwards cubic-bezier(.2,1.5,.4,1); }
+        @keyframes dropIn { from { opacity: 0; transform: translateY(-40px) skewX(-14deg) scale(1.4); } }
+        .typed {
+            font-family: var(--font-cond); font-weight: 700; font-style: italic; text-transform: uppercase;
+            font-size: clamp(1rem, 3vw, 1.6rem); background: #fff; color: var(--ink);
+            display: inline-block; padding: 4px 14px; transform: skewX(-10deg); letter-spacing: 1px;
+            min-height: 1.9em; box-shadow: 4px 4px 0 rgba(0,0,0,.5);
+        }
+        .typed::after { content: '▌'; color: var(--red); animation: blink .7s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+        .btn-p5 {
+            font-family: var(--font-cond); font-weight: 700; font-style: italic; text-transform: uppercase;
+            letter-spacing: 1.5px; font-size: 1.05rem; text-decoration: none; color: var(--ink);
+            background: #fff; padding: 12px 24px; transform: skewX(-10deg); position: relative;
+            border: 3px solid var(--ink); transition: transform .15s, background .2s, color .2s;
+            box-shadow: 5px 5px 0 var(--ink);
+        }
+        .btn-p5 span { display: inline-block; transform: skewX(10deg); }
+        .btn-p5:hover { background: var(--ink); color: #fff; transform: skewX(-10deg) translate(-2px,-2px); box-shadow: 8px 8px 0 rgba(0,0,0,.6); }
+        .btn-p5.dark { background: var(--ink); color: #fff; border-color: #fff; }
+        .btn-p5.dark:hover { background: #fff; color: var(--ink); }
+
+        /* scroll cue */
+        .scroll-cue { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); z-index: 5; text-align: center; font-family: var(--font-cond); font-style: italic; text-transform: uppercase; letter-spacing: 2px; animation: floaty 2s infinite; }
+
+        /* ===================== ABOUT ===================== */
+        #about { background: var(--ink); }
+        .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 44px; align-items: center; }
+        .about-photo img {
+            width: 100%; border: 4px solid var(--red); filter: grayscale(30%) contrast(1.1);
+            clip-path: polygon(0 4%, 100% 0, 96% 100%, 4% 96%); box-shadow: 12px 12px 0 var(--red);
+        }
+        .about-text p { font-size: 1.12rem; line-height: 1.7; color: #ddd; margin-bottom: 22px; }
+        .about-text p b { color: #fff; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .info-grid .cell {
+            border-left: 4px solid var(--red); padding: 6px 14px; background: rgba(255,255,255,.04);
+            transform: skewX(-4deg);
+        }
+        .info-grid .cell b { display: block; font-family: var(--font-cond); font-style: italic; text-transform: uppercase; color: var(--red); letter-spacing: 1px; font-size: .9rem; }
+        .info-grid .cell span { font-weight: 600; }
+
+        /* ===================== QUALIFICATION ===================== */
+        #qual { background: var(--paper); color: var(--ink); }
+        #qual .sec-head .ghost { -webkit-text-stroke: 2px rgba(0,0,0,.12); }
+        .qual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 46px; }
+        .col-title { font-family: var(--font-display); text-transform: uppercase; font-size: 2rem; margin-bottom: 26px; display: inline-block; background: var(--ink); color: #fff; padding: 4px 18px; transform: skewX(-8deg); }
+        .tl { border-left: 4px solid var(--red); padding-left: 26px; }
+        .tl .item { position: relative; margin-bottom: 26px; background: #fff; padding: 16px 20px; border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); transform: skewX(-2deg); transition: transform .2s; }
+        .tl .item:hover { transform: skewX(-2deg) translate(-3px,-3px); box-shadow: 9px 9px 0 var(--red); }
+        .tl .item::before { content: ''; position: absolute; left: -33px; top: 20px; width: 16px; height: 16px; background: var(--red); border: 3px solid var(--ink); transform: rotate(45deg); }
+        .tl .item h4 { font-family: var(--font-cond); font-weight: 700; font-size: 1.3rem; text-transform: uppercase; }
+        .tl .item .org { font-weight: 700; color: var(--red); margin: 2px 0 8px; }
+        .tl .item .org small { color: #666; font-weight: 600; }
+        .tl .item p { font-size: .98rem; line-height: 1.55; color: #333; }
+
+        /* ===================== PROJECTS ===================== */
+        #project { background: var(--ink); }
+        .proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 26px; }
+        .card {
+            background: #fff; color: var(--ink); border: 3px solid #fff; position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 88%, 92% 100%, 0 100%);
+            transition: transform .25s, box-shadow .25s; overflow: hidden;
+        }
+        .card::after {
+            content: '★'; position: absolute; top: 8px; right: 12px; color: var(--red); font-size: 1.4rem;
+            opacity: 0; transform: scale(0) rotate(-40deg); transition: .25s;
+        }
+        .card:hover { transform: translateY(-8px) skewX(-2deg); box-shadow: 12px 14px 0 var(--red); }
+        .card:hover::after { opacity: 1; transform: scale(1) rotate(0); }
+        .card .top { background: var(--red); height: 8px; }
+        .card .body { padding: 22px 20px 26px; }
+        .card .tag { font-family: var(--font-cond); font-style: italic; font-weight: 700; text-transform: uppercase; font-size: .8rem; letter-spacing: 1px; color: var(--red); }
+        .card h3 { font-family: var(--font-display); font-size: 1.5rem; text-transform: uppercase; line-height: 1; margin: 4px 0 10px; }
+        .card p { font-size: .95rem; line-height: 1.5; color: #444; }
+        .card a.link {
+            display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; text-decoration: none;
+            font-family: var(--font-cond); font-weight: 700; font-style: italic; text-transform: uppercase;
+            color: #fff; background: var(--ink); padding: 6px 16px; transform: skewX(-8deg); transition: background .2s;
+        }
+        .card a.link:hover { background: var(--red); }
+        .card .internal { display: inline-block; margin-top: 14px; font-family: var(--font-cond); font-weight: 700; font-style: italic; text-transform: uppercase; color: #999; font-size: .85rem; letter-spacing: 1px; }
+
+        /* ===================== SKILLS ===================== */
+        #skill { background: var(--paper); color: var(--ink); }
+        #skill .sec-head .ghost { -webkit-text-stroke: 2px rgba(0,0,0,.12); }
+        .skill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .skill-block { margin-bottom: 26px; }
+        .skill-block .cat { font-family: var(--font-cond); font-weight: 700; font-style: italic; text-transform: uppercase; font-size: 1.25rem; background: var(--ink); color: #fff; display: inline-block; padding: 3px 16px; transform: skewX(-8deg); margin-bottom: 12px; }
+        .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .chip {
+            font-family: var(--font-cond); font-weight: 600; text-transform: uppercase; letter-spacing: .5px;
+            background: #fff; border: 2px solid var(--ink); padding: 5px 14px; transform: skewX(-8deg);
+            font-size: .92rem; transition: background .2s, color .2s, transform .15s; cursor: default;
+        }
+        .chip:hover { background: var(--red); color: #fff; border-color: var(--red); transform: skewX(-8deg) translateY(-3px); }
+
+        /* ===================== FOOTER / CONTACT ===================== */
+        #contact { background: var(--red); color: #fff; padding-bottom: 40px; }
+        #contact::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(0,0,0,.25) 2px, transparent 2.2px); background-size: 14px 14px; opacity: .4; }
+        .contact-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; }
+        .contact-grid h2 { font-family: var(--font-display); font-size: clamp(2.4rem, 7vw, 5rem); line-height: .9; text-transform: uppercase; -webkit-text-stroke: 1px #000; }
+        .contact-grid p { font-size: 1.1rem; line-height: 1.6; margin: 16px 0 24px; max-width: 520px; }
+        .socials { display: flex; gap: 12px; flex-wrap: wrap; }
+        .socials a {
+            width: 54px; height: 54px; display: grid; place-items: center; font-size: 1.4rem;
+            background: var(--ink); color: #fff; text-decoration: none; transform: skewX(-8deg);
+            border: 2px solid #fff; transition: transform .15s, background .2s, color .2s;
+        }
+        .socials a:hover { background: #fff; color: var(--red); transform: skewX(-8deg) translateY(-5px) rotate(-4deg); }
+        .contact-card { background: var(--ink); padding: 30px; transform: skewX(-3deg); box-shadow: 12px 12px 0 rgba(0,0,0,.4); }
+        .contact-card > * { transform: skewX(3deg); }
+        .contact-card .row { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+        .contact-card .row i { color: var(--red); font-size: 1.3rem; width: 26px; text-align: center; }
+        .contact-card .row a, .contact-card .row span { color: #fff; text-decoration: none; font-weight: 600; word-break: break-word; }
+        .contact-card .row a:hover { color: var(--red); }
+
+        .copyright { text-align: center; margin-top: 50px; font-family: var(--font-cond); font-style: italic; text-transform: uppercase; letter-spacing: 2px; position: relative; z-index: 2; }
+
+        /* floating decorative stars */
+        .float-star { position: absolute; color: rgba(255,255,255,.08); pointer-events: none; z-index: 0; animation: spin 22s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* back to top */
+        .to-top { position: fixed; bottom: 26px; right: 26px; z-index: 8000; background: var(--red); color: #fff; border: 3px solid #fff; width: 52px; height: 52px; display: grid; place-items: center; text-decoration: none; transform: skewX(-8deg); font-size: 1.3rem; opacity: 0; pointer-events: none; transition: opacity .3s, transform .2s; box-shadow: 5px 5px 0 rgba(0,0,0,.5); }
+        .to-top.show { opacity: 1; pointer-events: auto; }
+        .to-top:hover { transform: skewX(-8deg) translateY(-4px); }
+
+        @media (max-width: 860px) {
+            .hero-grid, .about-grid, .qual-grid, .skill-grid, .contact-grid { grid-template-columns: 1fr; }
+            .hero-text { text-align: center; order: 2; }
+            .hero-photo { order: 1; }
+            #home::after { display: none; }
+            .cta { justify-content: center; }
+            .info-grid { grid-template-columns: 1fr; }
+            section { padding: 70px 20px; }
+        }
+    </style>
 </head>
 
-<body data-spy="scroll" data-target=".navbar" data-offset="51">
-    <!-- Navbar Start -->
-    <nav class="navbar fixed-top shadow-sm navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5">
-        <a href="#home" class="navbar-brand ml-lg-3">
-            <h1 class="m-0 display-5"><span class="text-primary">Akbar</span> Prakoso</h1>
-        </a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse px-lg-3" id="navbarCollapse">
-            <div class="navbar-nav m-auto py-0">
-                <a href="#home" class="nav-item nav-link active">Home</a>
-                <a href="#about" class="nav-item nav-link">About</a>
-                <a href="#qualification" class="nav-item nav-link">Qualification</a>
-                <a href="#skill" class="nav-item nav-link">Skills</a>
-                <a href="#contact" class="nav-item nav-link">Contact</a>
-            </div>
+<body>
+
+    <!-- CURSOR -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <!-- SPLASH -->
+    <div id="splash" class="halftone">
+        <h1>SHOWTIME<span>TAKE YOUR HEART</span></h1>
+    </div>
+
+    <!-- NAV -->
+    <nav id="nav">
+        <a href="#home" class="brand" data-hover>A<span>P</span></a>
+        <button class="burger" id="burger" aria-label="menu"><span></span><span></span><span></span></button>
+        <div class="menu" id="menu">
+            <a href="#home" data-hover><span>Home</span></a>
+            <a href="#about" data-hover><span>About</span></a>
+            <a href="#qual" data-hover><span>Records</span></a>
+            <a href="#project" data-hover><span>Heists</span></a>
+            <a href="#skill" data-hover><span>Skills</span></a>
+            <a href="#contact" data-hover><span>Contact</span></a>
         </div>
     </nav>
-    <!-- Navbar End -->
 
-    <!-- Header Start -->
-    <div class="container-fluid bg-primary d-flex align-items-center mb-5 py-5" id="home" style="min-height: 100vh;">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-5 px-5 pl-lg-0 pb-5 pb-lg-0">
-                    <img class="img-fluid w-100 rounded-circle shadow-sm" src="img/profile.jpg" alt="">
+    <!-- HERO -->
+    <section id="home">
+        <div class="wrap">
+            <div class="hero-grid">
+                <div class="hero-photo reveal">
+                    <img src="img/profile.jpg" alt="Akbar Muhammad Prakoso">
+                    <div class="badge">CODE: JOKER</div>
                 </div>
-                <div class="col-lg-7 text-center text-lg-left">
-                    <h3 class="text-white font-weight-normal mb-3">I'm</h3>
-                    <h1 class="display-3 text-uppercase text-primary mb-2" style="-webkit-text-stroke: 2px #ffffff;">Akbar Muhammad Prakoso</h1>
-                    <h1 class="typed-text-output d-inline font-weight-lighter text-white"></h1>
-                    <div class="typed-text d-none">AI Enthusiast, Web Developer, DevOps Engineer</div>
-                    <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
-                        <a href="https://drive.google.com/file/d/1kGcak3d9O2Y1vx96MKa9Lq3WlOKYoyYZ/view?usp=sharing" class="btn btn-outline-light mr-3">Download CV</a>
-                        <a href="https://akbarmuh.github.io/Folio" class="btn btn-outline-light mr-3">Portfolio</a>
-                        <a href="https://github.com/AkbarMuh/" class="btn btn-outline-light mr-3">Github</a>
-                        <a href="https://www.linkedin.com/in/akbar-muhammad-205616197/" class="btn btn-outline-light">LinkedIn</a>
+                <div class="hero-text">
+                    <div class="hi reveal">I'm</div>
+                    <h1 id="heroName" aria-label="Akbar Muhammad Prakoso"></h1>
+                    <span class="typed" id="typed"></span>
+                    <div class="cta reveal">
+                        <a class="btn-p5" href="https://drive.google.com/file/d/1kGcak3d9O2Y1vx96MKa9Lq3WlOKYoyYZ/view?usp=sharing" target="_blank" data-hover><span>Download CV</span></a>
+                        <a class="btn-p5 dark" href="https://github.com/AkbarMuh/" target="_blank" data-hover><span><i class="fab fa-github"></i> Github</span></a>
+                        <a class="btn-p5 dark" href="https://www.linkedin.com/in/akbar-muhammad-205616197/" target="_blank" data-hover><span><i class="fab fa-linkedin-in"></i> LinkedIn</span></a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Header End -->
+        <div class="scroll-cue">Infiltrate ↓</div>
+    </section>
 
-    <!-- About Start -->
-    <div class="container-fluid py-5" id="about">
-        <div class="container">
-            <div class="position-relative d-flex align-items-center justify-content-center">
-                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">About</h1>
-                <h1 class="position-absolute text-uppercase text-primary">About Me</h1>
+    <!-- ABOUT -->
+    <section id="about">
+        <i class="fas fa-star float-star" style="top:10%; right:6%; font-size:120px;"></i>
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <div class="ghost">Profile</div>
+                <div class="title">About Me</div>
             </div>
-            <div class="row align-items-center">
-                <div class="col-lg-5 pb-4 pb-lg-0">
-                    <img class="img-fluid rounded w-100" src="img/about.jpg" alt="">
-                </div>
-                <div class="col-lg-7">
-                    <h3 class="mb-4">Informatics Student & AI Enthusiast</h3>
-                    <p>I am a third-year Informatics student at Telkom University with a strong focus on Artificial Intelligence. I have a passion for developing innovative AI solutions and have experience in web development and DevOps.</p>
-                    <div class="row mb-3">
-                        <div class="col-sm-6 py-2"><h6>Name: <span class="text-secondary">Akbar Muhammad Prakoso</span></h6></div>
-                        <div class="col-sm-6 py-2"><h6>Birthday: <span class="text-secondary">April 9, 2003</span></h6></div>
-                        <div class="col-sm-6 py-2"><h6>Degree: <span class="text-secondary">Informatics (BSc)</span></h6></div>
-                        <div class="col-sm-6 py-2"><h6>Experience: <span class="text-secondary">3 Years</span></h6></div>
-                        <div class="col-sm-6 py-2"><h6>Email: <span class="text-secondary">akbar.muhammt@gmail.com</span></h6></div>
-                        <div class="col-sm-6 py-2"><h6>Address: <span class="text-secondary">Bandung, Indonesia</span></h6></div>
+            <div class="about-grid">
+                <div class="about-photo reveal"><img src="img/about.jpg" alt="Akbar"></div>
+                <div class="about-text reveal">
+                    <p>I build and ship <b>end-to-end AI systems</b> — from agentic LLM applications and RAG pipelines to real-time computer vision deployed on edge hardware. Currently driving applied-AI initiatives in the <b>Enterprise Data Analytics Group at Bank Mandiri</b>, moving toward an <b>AI Solutions Architect</b> track.</p>
+                    <div class="info-grid">
+                        <div class="cell"><b>Name</b><span>Akbar Muhammad Prakoso</span></div>
+                        <div class="cell"><b>Birthday</b><span>April 9, 2003</span></div>
+                        <div class="cell"><b>Role</b><span>Applied AI Engineer</span></div>
+                        <div class="cell"><b>Degree</b><span>B.Sc. Informatics (CS)</span></div>
+                        <div class="cell"><b>Email</b><span>akbar.muhammad@gmail.com</span></div>
+                        <div class="cell"><b>Location</b><span>Indonesia</span></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- About End -->
+    </section>
 
-    <!-- Qualification Start -->
-    <div class="container-fluid py-5" id="qualification">
-        <div class="container">
-            <div class="position-relative d-flex align-items-center justify-content-center">
-                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Quality</h1>
-                <h1 class="position-absolute text-uppercase text-primary">Education & Experience</h1>
+    <!-- QUALIFICATION -->
+    <section id="qual">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <div class="ghost">Records</div>
+                <div class="title">Education &amp; Experience</div>
             </div>
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h3 class="mb-4">Education</h3>
-                    <div class="border-left border-primary pt-2 pl-4 ml-2">
-                        <div class="position-relative mb-4">
-                            <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
-                            <h5 class="font-weight-bold mb-1">SMK Telkom Malang</h5>
-                            <p class="mb-2"><strong>Telecommunications Engineering</strong> | <small>2018 - 2020</small></p>
-                            <p>A leading vocational school in the field of Technology and Informatics, accredited "A" with ISO 9001:2015 standards.</p>
+            <div class="qual-grid">
+                <div class="reveal">
+                    <span class="col-title">Education</span>
+                    <div class="tl">
+                        <div class="item">
+                            <h4>Telkom University</h4>
+                            <div class="org">B.Sc. in Informatics (Computer Science) <small>· 2021 – 2024</small></div>
+                            <p>One of Indonesia's top universities in technology and innovation, under the Telkom Education Foundation.</p>
                         </div>
-                        <div class="position-relative mb-4">
-                            <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
-                            <h5 class="font-weight-bold mb-1">Telkom University</h5>
-                            <p class="mb-2"><strong>Bachelor of Informatics</strong> | <small>2021 - Present</small></p>
-                            <p>One of Indonesia's top universities known for its excellence in technology and innovation, combining four leading higher education institutions under the Telkom Education Foundation.</p>
+                        <div class="item">
+                            <h4>Bangkit Academy</h4>
+                            <div class="org">Machine Learning Path <small>· 2023</small></div>
+                            <p>Google-led career program with Tokopedia, Gojek &amp; Traveloka — Machine Learning track.</p>
+                        </div>
+                        <div class="item">
+                            <h4>SMK Telkom Malang</h4>
+                            <div class="org">Computer &amp; Network Engineering <small>· 2018 – 2021</small></div>
+                            <p>Leading vocational school in Technology &amp; Informatics, accredited "A" (ISO 9001:2015).</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <h3 class="mb-4">Experience</h3>
-                    <div class="border-left border-primary pt-2 pl-4 ml-2">
-                        <div class="position-relative mb-4">
-                            <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
-                            <h5 class="font-weight-bold mb-1">AI Engineer Intern</h5>
-                            <p class="mb-2"><strong>Bank Mandiri (Persero) Tbk</strong> | <small>2020</small></p>
-                            <p>Developed AI Chat bot and Generatif AI, contributing to multiple projects during my internship.</p>
+                <div class="reveal">
+                    <span class="col-title">Experience</span>
+                    <div class="tl">
+                        <div class="item">
+                            <h4>Officer, R&amp;D &amp; Strategic Project</h4>
+                            <div class="org">Bank Mandiri — Enterprise Data Analytics <small>· Jul 2025 – Present</small></div>
+                            <p>Driving applied-AI initiatives across AI, data analytics, cloud &amp; digital transformation.</p>
                         </div>
-                        <div class="position-relative mb-4">
-                            <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
-                            <h5 class="font-weight-bold mb-1">Web Development Intern</h5>
-                            <p class="mb-2"><strong>Otak Kanan</strong> | <small>2020</small></p>
-                            <p>Developed web applications using Laravel and PHP, contributing to multiple projects during my internship.</p>
+                        <div class="item">
+                            <h4>Officer Development Program (ODP) — IT</h4>
+                            <div class="org">Bank Mandiri (Persero) Tbk <small>· Apr 2025 – Jan 2026</small></div>
+                            <p>Structured leadership and technical development across IT and data functions.</p>
                         </div>
-                        <div class="position-relative mb-4">
-                            <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
-                            <h5 class="font-weight-bold mb-1">DevOps Intern</h5>
-                            <p class="mb-2"><strong>Jagoan Hosting</strong> | <small>2021</small></p>
-                            <p>Gained hands-on experience in managing servers and automation processes to ensure efficient operations.</p>
+                        <div class="item">
+                            <h4>Digital Talent Intern (MSIB Batch 7)</h4>
+                            <div class="org">Bank Mandiri (Persero) Tbk <small>· Sep 2024 – Jan 2025</small></div>
+                            <p>Enterprise AI in conversational AI, RAG platforms &amp; AI-assisted software delivery.</p>
                         </div>
-                        <div class="position-relative mb-4">
-                            <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
-                            <h5 class="font-weight-bold mb-1">AI Engineer</h5>
-                            <p class="mb-2"><strong>Memories's Team</strong> | <small>2022</small></p>
-                            <p>PKMKC Project in term Digital Transformation Museum in Asia-Afrika Bandung Museums, Interaction Bot using Voice to
-                                input and Using Generatif AI to make a Answer with Voice Syntetic to make more nature and friendly
-                                Link Proyek : https://www.instagram.com/memories.pkmkc/</p>
+                        <div class="item">
+                            <h4>Teaching Assistant, Computer Vision</h4>
+                            <div class="org">Telkom University <small>· Feb 2025 – Jul 2025</small></div>
+                            <p>Assisted teaching and lab sessions for the Computer Vision course.</p>
                         </div>
-                        <div class="position-relative mb-4">
-                            <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
-                            <h5 class="font-weight-bold mb-1">AI Engineer</h5>
-                            <p class="mb-2"><strong>KopAI's Team</strong> | <small>2024</small></p>
-                            <p>Personalizes your coffee experience based on your unique preferences, allowing you to easily order and customize your
-                                coffee's blend, grind, and roast from your phone. Featuring advanced tools such as Generative AI for fun coffee facts, a
-                                recommendation system tailored to your taste, and predictive analysis of your custom blends, KOPAI ensures an
-                                exceptional coffee journey.
-                                Link Proyek : https://kop-ai.</p>
+                        <div class="item">
+                            <h4>Full Stack Web Developer (Intern)</h4>
+                            <div class="org">Diskominfo Jabar <small>· Jul 2024 – Sep 2024</small></div>
+                            <p>Built web features with Laravel for the Communication &amp; Informatics Office of West Java.</p>
                         </div>
-                        <div class="position-relative mb-4">
-                            <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
-                            <h5 class="font-weight-bold mb-1">Web Development Intern</h5>
-                            <p class="mb-2"><strong>Diskominfo Bandung</strong> | <small>2020</small></p>
-                            <p>the Cooperative for the Communication and Informatics Office of West Java, revolutionizes digital engagement by creating
-                                user-friendly, responsive websites tailored to enhance online presence and streamline communication channels. Our
-                                innovative solutions improve accessibility, foster community interaction, and provide seamless information dissemination,
-                                empowering the office to serve the communit
-                                Link Proyek : https://github.com/irizkyw/diskominfo-koperasi</p>
+                        <div class="item">
+                            <h4>Board Member</h4>
+                            <div class="org">Google Developer Student Clubs, Telkom Univ <small>· Nov 2023 – Sep 2024</small></div>
+                            <p>Organized technical programs and community activities for student developers.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Qualification End -->
+    </section>
 
-    <!-- Projects Start -->
-<div class="container-fluid py-5" id="project">
-    <div class="container">
-        <div class="position-relative d-flex align-items-center justify-content-center">
-            <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Projects</h1>
-            <h1 class="position-absolute text-uppercase text-primary">My Projects</h1>
+    <!-- PROJECTS -->
+    <section id="project">
+        <i class="fas fa-star float-star" style="bottom:8%; left:4%; font-size:150px;"></i>
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <div class="ghost">Heists</div>
+                <div class="title">My Projects</div>
+            </div>
+            <div class="proj-grid">
+                <div class="card reveal"><div class="top"></div><div class="body">
+                    <span class="tag">AI · Streamlit</span><h3>KopAI</h3>
+                    <p>Personalizes your coffee experience with generative AI, recommendation, and predictive blend analysis.</p>
+                    <a class="link" href="https://kop-ai.streamlit.app/" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
+                </div></div>
+                <div class="card reveal"><div class="top"></div><div class="body">
+                    <span class="tag">Generative AI · Voice</span><h3>Memories</h3>
+                    <p>PKMKC project — digital transformation of the Asia-Afrika Bandung Museums with a voice interaction bot.</p>
+                    <a class="link" href="https://www.instagram.com/memories.pkmkc/" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
+                </div></div>
+                <div class="card reveal"><div class="top"></div><div class="body">
+                    <span class="tag">Dataset · Computer Vision</span><h3>Aksaratara</h3>
+                    <p>A place to explore the Indonesian traditional script (Aksara) dataset.</p>
+                    <a class="link" href="https://aksantara.my.id" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
+                </div></div>
+                <div class="card reveal"><div class="top"></div><div class="body">
+                    <span class="tag">Web · Laravel</span><h3>KODIJA</h3>
+                    <p>Cooperative platform for the Communication &amp; Informatics Office of West Java.</p>
+                    <a class="link" href="https://github.com/irizkyw/diskominfo-koperasi" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
+                </div></div>
+                <div class="card reveal"><div class="top"></div><div class="body">
+                    <span class="tag">Health · AI</span><h3>MealMate</h3>
+                    <p>Assists users in making healthy food choices with smart recommendations.</p>
+                    <a class="link" href="https://github.com/sintiadc/MealMate" target="_blank" data-hover>Steal it <i class="fas fa-arrow-right"></i></a>
+                </div></div>
+                <div class="card reveal"><div class="top"></div><div class="body">
+                    <span class="tag">Edge AI · Enterprise</span><h3>Edge Computer Vision</h3>
+                    <p>Real-time surveillance/analytics across multiple NVIDIA Jetson Orin NX nodes — checksum-verified releases, secure Cloudflare Tunnel access.</p>
+                    <span class="internal"><i class="fas fa-lock"></i> Internal</span>
+                </div></div>
+                <div class="card reveal"><div class="top"></div><div class="body">
+                    <span class="tag">LLM · Enterprise</span><h3>AI Quality-Monitoring</h3>
+                    <p>Python + Streamlit on Cloudera ML with Azure OpenAI, applying a structured scoring rubric across quality dimensions.</p>
+                    <span class="internal"><i class="fas fa-lock"></i> Internal</span>
+                </div></div>
+                <div class="card reveal"><div class="top"></div><div class="body">
+                    <span class="tag">Agentic AI · RAG</span><h3>Multi-Agent Data System</h3>
+                    <p>RAG system with specialized agents under an orchestrator for column captioning, NL-to-SQL, and monitoring with semi-automated remediation.</p>
+                    <span class="internal"><i class="fas fa-lock"></i> Internal</span>
+                </div></div>
+            </div>
         </div>
-        <div class="row">
-            <!-- KopAI Project -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="project-item bg-light rounded overflow-hidden">
-                    <div class="project-img position-relative overflow-hidden">
-                        <!-- <img class="img-fluid w-100" src="img/project-7.jpg" alt="KopAI"> -->
-                        <div class="project-social">
-                            <a class="btn btn-outline-primary mx-1" href="https://kop-ai.streamlit.app/"><i class="fa fa-link"></i></a>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skill">
+        <div class="wrap">
+            <div class="sec-head reveal">
+                <div class="ghost">Arsenal</div>
+                <div class="title">My Skills</div>
+            </div>
+            <div class="skill-grid">
+                <div class="reveal">
+                    <div class="skill-block">
+                        <div class="cat">AI / Machine Learning</div>
+                        <div class="chips">
+                            <span class="chip">Agentic AI</span><span class="chip">LLM Engineering</span><span class="chip">RAG</span><span class="chip">Prompt Engineering</span><span class="chip">Computer Vision</span><span class="chip">YOLO / CNN</span><span class="chip">NLP</span><span class="chip">Deep Learning</span><span class="chip">Azure OpenAI</span><span class="chip">Anthropic Claude</span>
                         </div>
                     </div>
-                    <div class="text-center p-4">
-                        <h5 class="mb-0">KopAI</h5>
-                        <small>Personalizes your coffee experience based on your unique preferences.</small>
+                    <div class="skill-block">
+                        <div class="cat">Edge AI / Embedded</div>
+                        <div class="chips">
+                            <span class="chip">NVIDIA Jetson Orin NX</span><span class="chip">JetPack / BSP</span><span class="chip">Ollama</span><span class="chip">NanoLLM</span><span class="chip">Quantization</span><span class="chip">Seeed reComputer</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- Memories Project -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="project-item bg-light rounded overflow-hidden">
-                    <div class="project-img position-relative overflow-hidden">
-                        <!-- <img class="img-fluid w-100" src="img/project-1.jpg" alt="Memories"> -->
-                        <div class="project-social">
-                            <a class="btn btn-outline-primary mx-1" href="https://www.instagram.com/memories.pkmkc/"><i class="fa fa-link"></i></a>
+                <div class="reveal">
+                    <div class="skill-block">
+                        <div class="cat">MLOps / Infrastructure</div>
+                        <div class="chips">
+                            <span class="chip">Cloudera ML</span><span class="chip">Datadog</span><span class="chip">Grafana</span><span class="chip">Prometheus</span><span class="chip">Cloudflare Tunnel</span><span class="chip">Linux / Ubuntu</span><span class="chip">Bash</span>
                         </div>
                     </div>
-                    <div class="text-center p-4">
-                        <h5 class="mb-0">Memories</h5>
-                        <small>PKMKC Project in Digital Transformation Museum in Asia-Afrika Bandung Museums.</small>
-                    </div>
-                </div>
-            </div>
-            <!-- Aksaratara Project -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="project-item bg-light rounded overflow-hidden">
-                    <div class="project-img position-relative overflow-hidden">
-                        <!-- <img class="img-fluid w-100" src="img/project-2.jpg" alt="Aksaratara"> -->
-                        <div class="project-social">
-                            <a class="btn btn-outline-primary mx-1" href="https://aksantara.my.id"><i class="fa fa-link"></i></a>
+                    <div class="skill-block">
+                        <div class="cat">Programming &amp; Frameworks</div>
+                        <div class="chips">
+                            <span class="chip">Python</span><span class="chip">JavaScript</span><span class="chip">PHP</span><span class="chip">SQL</span><span class="chip">Streamlit</span><span class="chip">Laravel</span><span class="chip">React</span><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">Oracle</span><span class="chip">BigQuery</span>
                         </div>
                     </div>
-                    <div class="text-center p-4">
-                        <h5 class="mb-0">Aksaratara</h5>
-                        <small>Tempat untuk Menjelajahi Dataset Aksara Indonesia.</small>
-                    </div>
-                </div>
-            </div>
-            <!-- KODIJA Project -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="project-item bg-light rounded overflow-hidden">
-                    <div class="project-img position-relative overflow-hidden">
-                        <!-- <img class="img-fluid w-100" src="img/project-3.jpg" alt="KODIJA"> -->
-                        <div class="project-social">
-                            <a class="btn btn-outline-primary mx-1" href="https://github.com/irizkyw/diskominfo-koperasi"><i class="fa fa-link"></i></a>
+                    <div class="skill-block">
+                        <div class="cat">Languages</div>
+                        <div class="chips">
+                            <span class="chip">Indonesian (native)</span><span class="chip">English (working)</span>
                         </div>
-                    </div>
-                    <div class="text-center p-4">
-                        <h5 class="mb-0">KODIJA Koperasi Diskominfo Jawabarat</h5>
-                        <small>The Cooperative for the Communication and Informatics Office of West Java.</small>
-                    </div>
-                </div>
-            </div>
-            <!-- MealMate Project -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="project-item bg-light rounded overflow-hidden">
-                    <div class="project-img position-relative overflow-hidden">
-                        <!-- <img class="img-fluid w-100" src="img/project-4.jpg" alt="MealMate"> -->
-                        <div class="project-social">
-                            <a class="btn btn-outline-primary mx-1" href="https://github.com/sintiadc/MealMate"><i class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4">
-                        <h5 class="mb-0">MealMate</h5>
-                        <small>Aims to assist users in making healthy food choices.</small>
-                    </div>
-                </div>
-            </div>
-            <!-- Additional Projects -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="project-item bg-light rounded overflow-hidden">
-                    <div class="project-img position-relative overflow-hidden">
-                        <!-- <img class="img-fluid w-100" src="img/project-5.jpg" alt="Project 5"> -->
-                        <div class="project-social">
-                            <a class="btn btn-outline-primary mx-1" href="#"><i class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4">
-                        <h5 class="mb-0">Panteng.In</h5>
-                        <small>Real-time stock tracking application</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="project-item bg-light rounded overflow-hidden">
-                    <div class="project-img position-relative overflow-hidden">
-                        <!-- <img class="img-fluid w-100" src="img/project-6.jpg" alt="Project 6"> -->
-                        <div class="project-social">
-                            <a class="btn btn-outline-primary mx-1" href="#"><i class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4">
-                        <h5 class="mb-0">AnimeFlix</h5>
-                        <small>Anime streaming platform</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="project-item bg-light rounded overflow-hidden">
-                    <div class="project-img position-relative overflow-hidden">
-                        <!-- <img class="img-fluid w-100" src="img/project-3.jpg" alt="Project 3"> -->
-                        <div class="project-social">
-                            <a class="btn btn-outline-primary mx-1" href="#"><i class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4">
-                        <h5 class="mb-0">WEB FOR MANAGEMENT SCHOOL</h5>
-                        <small>Educational management platform</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="project-item bg-light rounded overflow-hidden">
-                    <div class="project-img position-relative overflow-hidden">
-                        <!-- <img class="img-fluid w-100" src="img/project-4.jpg" alt="Project 4"> -->
-                        <div class="project-social">
-                            <a class="btn btn-outline-primary mx-1" href="#"><i class="fa fa-link"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4">
-                        <h5 class="mb-0">WEB FOR MANAGEMENT STUDIO</h5>
-                        <small>Studio management tool</small>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<!-- Projects End -->
- 
+    </section>
 
-
-    <!-- Skill Start -->
-    <div class="container-fluid py-5" id="skill">
-        <div class="container">
-            <div class="position-relative d-flex align-items-center justify-content-center">
-                <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">Skills</h1>
-                <h1 class="position-absolute text-uppercase text-primary">My Skills</h1>
-            </div>
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="skill mb-4">
-                        <div class="d-flex justify-content-between">
-                            <h4 class="font-weight-bold">Proggraming</h4>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h5 class="font-weight-bold"><br>Website</h5>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h5 class="font-weight">HTML | CSS | Laravel | PHP | JavaSpring</h5>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h5 class="font-weight-bold"><br>AI</h5>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h5 class="font-weight">LLM | AI-Agent | Prompt Flow | Machine Learning | Natural Language Processing | DeepLearning | CNN | YOLO | Computer Vision</h5>
-                        </div>
+    <!-- CONTACT / FOOTER -->
+    <section id="contact">
+        <div class="wrap">
+            <div class="contact-grid">
+                <div class="reveal">
+                    <h2>Let's Take<br>Your Heart</h2>
+                    <p>Applied AI Engineer building agentic LLM apps, RAG pipelines &amp; real-time computer vision on edge hardware. Open to collaboration on applied-AI projects.</p>
+                    <div class="socials">
+                        <a href="https://www.linkedin.com/in/akbar-muhammad-205616197/" target="_blank" data-hover><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/AkbarMuh/" target="_blank" data-hover><i class="fab fa-github"></i></a>
+                        <a href="mailto:akbar.muhammad@gmail.com" data-hover><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="skill mb-4">
-                        <div class="d-flex justify-content-between">
-                            <h4 class="font-weight-bold">SoftSkill</h4>
-                        </div>
-                    </div>
-                    <div class="skill mb-4">
-                        <div class="d-flex justify-content-between">
-                            <h5 class="font-weight">Leadership | Communication | Problem-solving | Technology Education | Collaboration</h5>
-                        </div>
-                    </div>
-                    
+                <div class="contact-card reveal">
+                    <div class="row"><i class="fas fa-map-marker-alt"></i><span>Indonesia</span></div>
+                    <div class="row"><i class="fas fa-envelope"></i><a href="mailto:akbar.muhammad@gmail.com" data-hover>akbar.muhammad@gmail.com</a></div>
+                    <div class="row"><i class="fab fa-github"></i><a href="https://github.com/AkbarMuh/" target="_blank" data-hover>github.com/AkbarMuh</a></div>
+                    <div class="row"><i class="fab fa-linkedin-in"></i><a href="https://www.linkedin.com/in/akbar-muhammad-205616197/" target="_blank" data-hover>in/akbar-muhammad</a></div>
                 </div>
             </div>
+            <div class="copyright">© <span id="year"></span> Akbar Muhammad Prakoso · All Rights Reserved</div>
         </div>
-    </div>
-    <!-- Skill End -->
+    </section>
 
-    <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-white py-4 px-sm-3 px-md-5">
-        <div class="row pt-5">
-            <div class="col-lg-6 col-md-12 mb-5">
-                <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Akbar Muhammad Prakoso</h5>
-                <p class="mb-4">I am a third-year Informatics student specializing in Artificial Intelligence and Web Development. Connect with me for collaborative projects and freelance work.</p>
-                <div class="d-flex justify-content-start mt-2">
-                    <a class="btn btn-outline-light btn-social mr-2" href="https://www.linkedin.com/in/akbar-muhammad-205616197/"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-outline-light btn-social mr-2" href="https://github.com/AkbarMuh/"><i class="fab fa-github"></i></a>
-                    <a class="btn btn-outline-light btn-social" href="mailto:akbar.muhammt@gmail.com"><i class="fa fa-envelope"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-12">
-                <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Contact Me</h5>
-                <div class="d-flex flex-column justify-content-start">
-                    <h6 class="text-uppercase mb-1"><i class="fa fa-map-marker-alt mr-3"></i>Bandung, Indonesia</h6>
-                    <h6 class="text-uppercase mb-1"><i class="fa fa-envelope mr-3"></i>akbar.muhammt@gmail.com</h6>
-                    <h6 class="text-uppercase mb-0"><i class="fa fa-phone-alt mr-3"></i>+62 812-3456-7890</h6>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 text-center text-md-left">
-                <div class="d-flex justify-content-between">
-                    <p class="m-0">© <a class="text-primary font-weight-bold" href="#">Akbar Muhammad Prakoso</a>. All Rights Reserved.</p>
-                    <div class="d-flex align-items-center">
-                        <a class="text-light pr-3" href="#">Privacy</a>
-                        <a class="text-light pr-3" href="#">Terms</a>
-                        <a class="text-light" href="#">FAQs</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer End -->
+    <a href="#home" class="to-top" id="toTop" data-hover><i class="fas fa-angle-up"></i></a>
 
+    <script>
+        // ===== SPLASH =====
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const s = document.getElementById('splash');
+                s.classList.add('done');
+                setTimeout(() => s.style.display = 'none', 700);
+            }, 1400);
+        });
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-outline-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+        // ===== HERO NAME STAGGER =====
+        (function () {
+            const name = "Akbar Prakoso";
+            const el = document.getElementById('heroName');
+            name.split(' ').forEach((word, wi) => {
+                const span = document.createElement('span');
+                span.className = 'word' + (wi === 0 ? ' stroke' : '');
+                span.textContent = word;
+                span.style.animationDelay = (1.5 + wi * 0.15) + 's';
+                el.appendChild(span);
+                if (wi === 0) el.appendChild(document.createTextNode(' '));
+            });
+        })();
 
+        // ===== TYPED TEXT =====
+        (function () {
+            const roles = ["Applied AI Engineer", "LLM & Agentic AI", "Computer Vision", "Edge AI · Jetson", "AI Solutions Architect"];
+            const t = document.getElementById('typed');
+            let r = 0, c = 0, deleting = false;
+            function tick() {
+                const word = roles[r];
+                t.textContent = word.substring(0, c);
+                if (!deleting && c < word.length) { c++; setTimeout(tick, 70); }
+                else if (!deleting && c === word.length) { deleting = true; setTimeout(tick, 1600); }
+                else if (deleting && c > 0) { c--; setTimeout(tick, 35); }
+                else { deleting = false; r = (r + 1) % roles.length; setTimeout(tick, 300); }
+            }
+            setTimeout(tick, 2200);
+        })();
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/typed/typed.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        // ===== NAV =====
+        const nav = document.getElementById('nav');
+        const toTop = document.getElementById('toTop');
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            nav.classList.toggle('scrolled', y > 60);
+            toTop.classList.toggle('show', y > 500);
+        });
+        const burger = document.getElementById('burger');
+        const menu = document.getElementById('menu');
+        burger.addEventListener('click', () => menu.classList.toggle('open'));
+        menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
 
-    <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+        // ===== SCROLL REVEAL =====
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+        // ===== CUSTOM CURSOR =====
+        (function () {
+            if (window.matchMedia('(max-width: 900px)').matches) return;
+            const dot = document.querySelector('.cursor-dot');
+            const ring = document.querySelector('.cursor-ring');
+            let rx = 0, ry = 0, mx = 0, my = 0;
+            window.addEventListener('mousemove', e => {
+                mx = e.clientX; my = e.clientY;
+                dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+            });
+            function loop() {
+                rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+                ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+                requestAnimationFrame(loop);
+            }
+            loop();
+            document.querySelectorAll('a, button, [data-hover], .chip, .card, .tl .item').forEach(el => {
+                el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
+            });
+        })();
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 
 </html>
